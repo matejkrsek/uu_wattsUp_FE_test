@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { login } from "../calls";
 import { hashPassword } from "../hashPassword";
+import { useNavigate } from "react-router";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,11 +19,17 @@ const LoginForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const hashedPassword = await hashPassword(formData.password); // Zahashuje heslo
     const hashedData = { ...formData, password: hashedPassword }; // Vytvoří nový objekt s hashovaným heslem
 
-    login(hashedData); // Odeslání hashovaných dat
+    try {
+      const response = await login(hashedData);
+      //  setToken(response.data.accessToken);
+    } catch (e) {
+      console.log("Error" + e);
+    }
+    navigate("/overview");
+    // Odeslání hashovaných dat
   };
 
   return (
@@ -40,7 +48,7 @@ const LoginForm = () => {
             type="email"
             name="email"
             placeholder="Enter email"
-            required
+            // required
             onChange={(e) => {
               setField("email", e.target.value);
             }}
@@ -53,7 +61,7 @@ const LoginForm = () => {
             type="password"
             name="password"
             placeholder="Password"
-            required
+            // required
             onChange={(e) => {
               setField("password", e.target.value);
             }}

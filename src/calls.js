@@ -25,11 +25,5 @@ export async function login(dtoIn) {
   return await call("POST", "/login", dtoIn);
 }
 
-// ShoppingList app
-export async function loadUsers() {
-  return await call("GET", "/users");
-}
 
-export async function loadLists() {
-  return await call("GET", "/shoppingList/list");
-}
+

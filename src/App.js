@@ -1,20 +1,23 @@
-import './App.css';
+import "./App.css";
 import React, { useContext } from "react";
-import { Outlet } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Outlet, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { NavDropdown, Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import Icon from '@mdi/react'
-
+import Icon from "@mdi/react";
 
 function App() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // changeUser(null)
+    navigate("/login");
+  };
 
   return (
     <div className={`App`}>
-
       <Navbar
         fixed="top"
         expand={"sm"}
@@ -23,7 +26,7 @@ function App() {
         variant="dark"
       >
         <Container fluid>
-          <Navbar.Brand>  W a t t s  U p  </Navbar.Brand>
+          <Navbar.Brand> W a t t s U p </Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-sm`} />
           <Navbar.Offcanvas id={`offcanvasNavbar-expand-sm`}>
             <Offcanvas.Header closeButton>
@@ -33,29 +36,23 @@ function App() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3 d-flex align-items-center">
-
                 <NavDropdown
                   title={"Unregistred"}
                   id={"nav-dropdown-dark"}
                   menuVariant={"dark"}
                 >
-                  <NavDropdown.Item>
-                    Admin
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
-                    User
-                  </NavDropdown.Item>
+                  <NavDropdown.Item>Admin</NavDropdown.Item>
+                  <NavDropdown.Item>User</NavDropdown.Item>
                 </NavDropdown>
-                <span className='me-3'></span>
+                <span className="me-3"></span>
 
                 <Button
                   variant={"outline-light"}
                   style={{ marginLeft: "30px" }}
-                //onClick={() => changeUser(null)}
+                  onClick={() => handleLogout()}
                 >
                   Log out
                 </Button>
-
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
