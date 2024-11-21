@@ -1,15 +1,23 @@
 import React, { useEffect, useContext, useState } from "react";
 import "../App.css";
-import ProjectTiles from "../bricks/ProjectCards";
-
+import ProjectCards from "../bricks/ProjectCards";
+import OverviewInterface from "../bricks/OverviewInterface";
 
 function OverviewR() {
-
- return (
-    <div style={{ marginTop:"100px" }}>
-      <ProjectTiles/>
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "100px",
+        marginLeft: "50px",
+        gap: "15px",
+      }}
+    >
+      <OverviewInterface />
+      <ProjectCards />
     </div>
   );
-};
+}
 
 export default OverviewR;
