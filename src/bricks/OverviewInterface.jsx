@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import DateRangePicker from "./DateRangePicker";
 
 const OverviewInterface = () => {
   const [filters, setFilters] = useState({
@@ -8,7 +9,7 @@ const OverviewInterface = () => {
     dates: "",
   });
 
-  const [name, setName] = useState("");
+  const [search, setSearch] = useState("");
   const [schoolName, setSchoolName] = useState("");
   // const [dates, setDates] = useState("");
 
@@ -21,13 +22,13 @@ const OverviewInterface = () => {
       {/* filtry + filter button */}
       <div
         style={{
-          color: "red",
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
           gap: "3px",
         }}
       >
+        {/*zastřešuje jak hledání názvu projektu, tak hledání názvu školy*/}
         <input
           type="text"
           className="form-control"
@@ -36,22 +37,12 @@ const OverviewInterface = () => {
             maxWidth: "400px",
             minWidth: "300px",
           }}
-          placeholder="Search name of the project"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <input
-          type="text"
-          className="form-control"
-          style={{
-            width: "80vw",
-            maxWidth: "400px",
-            minWidth: "300px",
-          }}
-          placeholder="Search name of the school"
-          value={schoolName}
-          onChange={(e) => setSchoolName(e.target.value)}
-        />
+        <DateRangePicker />
+
         <Button onClick={handleFilters()}>Filter</Button>
       </div>
 
