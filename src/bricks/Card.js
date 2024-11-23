@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import Icon from "@mdi/react";
 
-function Tile({ project }) {
+function Tile({ project, users }) {
   const navigate = useNavigate();
+  const createdByUser = users.find(user => user.id === project.createdBy);
 
   /*   const handleCardClick = () => {
         navigate(`/project/${detail.id}`, {state: {detail, ownerName, members}});
@@ -15,7 +16,7 @@ function Tile({ project }) {
       <Card.Body>
         <strong> {project.name} </strong> <br /> <br />
         <div style={{ textAlign: "left" }}>
-          <u>{"Created by:"}:</u> {project.createdBy}
+          <u>{"Created by:"}:</u> {createdByUser ? createdByUser.name : "Unknown"}
           <br />
           <u>{"Event date:"}:</u> {project.date}
         </div>

@@ -1,0 +1,20 @@
+[
+    {
+        "id": "123_1",
+        "projectId": "123",
+        "status": false,
+        "energy": 12
+    },
+    {
+        "id": "123_2",
+        "projectId": "123",
+        "status": false,
+        "energy": 20
+    },
+    {
+        "id": "123_3",
+        "projectId": "123",
+        "status": true,
+        "energy": null
+    }
+]
