@@ -3,7 +3,7 @@ import Tile from "./Card";
 
 const ProjectCards = ({ projects, users }) => {
 
-  console.log(projects);
+ //  console.log(projects);
 
   return (
     <div className="d-flex flex-wrap gap-3">

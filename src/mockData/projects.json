@@ -2,8 +2,8 @@
 {
     "id": "123",
     "name": "Project 1",
-    "date": "2024-11-25",
-    "school": "School",
+    "date": "2024-1-24",
+    "school": "School beta ",
     "description": "Brief description of the project",
     "createdBy": "111",
     "student": "333",
@@ -14,8 +14,8 @@
 {
     "id": "456",
     "name": "Project 2",
-    "date": "2024-12-01",
-    "school": "School",
+    "date": "2024-6-18",
+    "school": "School gamaX",
     "description": "Brief description of the project",
     "createdBy": "222",
     "student": "333",
@@ -26,8 +26,8 @@
 {
     "id": "789",
     "name": "Project 3",
-    "date": "2024-11-02",
-    "school": "School",
+    "date": "2024-11-21",
+    "school": "School alfa",
     "description": "Brief description of the project",
     "createdBy": "111",
     "student": "333",

@@ -12,12 +12,14 @@ import ProjectR from "./routes/ProjectR";
 import OverviewR from "./routes/OverviewR";
 import LoginR from "./routes/LoginR";
 import SettingsR from "./routes/SettingsR";
+import { FiltersProvider } from "./FiltersProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ProjectProvider>
       <DataProvider>
+        <FiltersProvider>
         <Router>
           <Routes>
             <Route path="/" element={<App />}>
@@ -29,6 +31,7 @@ root.render(
             </Route>
           </Routes>
         </Router>
+        </FiltersProvider>
       </DataProvider>
     </ProjectProvider>
   </React.StrictMode>
