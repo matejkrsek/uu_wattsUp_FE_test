@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFilters } from "../FiltersProvider";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-const CreateProjectButton = () => {
+const ProjectModalForm = (isModalShown, setIsModalShown) => {
  
-const [isModalShown, setIsModalShown] = useState(false);
+
+ 
 
   return (
-    <div>
-<Button variant="success" onClick={()=> (setIsModalShown(true))}> Create new project</Button>
-
-<Modal show={isModalShown} onHide={()=> (setIsModalShown(false))}>
+    <Modal show={isModalShown} onHide={()=> (setIsModalShown(false))}>
   
 
     <Modal.Header closeButton>
@@ -39,12 +37,7 @@ const [isModalShown, setIsModalShown] = useState(false);
   
   
 </Modal>
-    </div>
-   
   );
 };
 
-
-
-
-export default CreateProjectButton;
+export default ProjectModalForm;

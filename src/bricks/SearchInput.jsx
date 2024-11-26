@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFilters } from "../FiltersProvider";
 
-const SearchInput = () => {
-  const { filters, setFilters } = useFilters();
-  const [search, setSearch] = useState(filters.search || "");
+const SearchInput = ({ value, onSearchChange }) => {
+  const { filters } = useFilters();
+  const [search, setSearch] = useState(value || filters.search || "");
+
+  useEffect(() => {
+    setSearch(value);
+  }, [value]);
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-    setFilters({ ...filters, search: value });
+    const newValue = e.target.value;
+    setSearch(newValue);
+    onSearchChange(newValue); // Notify parent component
   };
 
   return (

@@ -16,7 +16,8 @@ function OverviewR() {
 
   useEffect(() => {
     fetchProject();
-    console.log(filters);
+    console.log(filters.search);
+    console.log(filters.dates[0]);
   }, [filters]);
 
   const updateProject = () => {
@@ -26,25 +27,25 @@ function OverviewR() {
   // Convert string date to Date object for comparison
   const parseDate = (date) => (date ? new Date(date) : null);
 
-  // Filter projects based on filters
-  const filteredProjects = projects.filter((project) => {
-    const projectDate = parseDate(project.date);
-    const startDate = parseDate(filters.startDate);
-    const endDate = parseDate(filters.endDate);
+// In OverviewR.js
+const filteredProjects = projects.filter((project) => {
+  const projectDate = parseDate(project.date);
+  const startDate = parseDate(filters.dates[0]);
+  const endDate = parseDate(filters.dates[1]);
 
-    const matchesDate =
-      (!startDate || projectDate >= startDate) &&
-      (!endDate || projectDate <= endDate);
+  const matchesDate =
+    (!startDate || projectDate >= startDate) &&
+    (!endDate || projectDate <= endDate);
 
-    const searchLower = filters.search.toLowerCase();
-    const matchesSearch =
-      project.name.toLowerCase().includes(searchLower) ||
-      project.school.toLowerCase().includes(searchLower);
+  // Ensure filters.search is a string before calling toLowerCase
+  const searchLower = (filters.search || "").toLowerCase(); // Default to empty string if undefined
+  const matchesSearch =
+    project.name.toLowerCase().includes(searchLower) ||
+    project.school.toLowerCase().includes(searchLower);
 
-     // console.log("startDate:" + startDate + "  endDate:" + endDate + "       Project Date:" + projectDate)
+  return matchesDate && matchesSearch;
+});
 
-    return matchesDate && matchesSearch;
-  });
 
   function getChild() {
     switch (status.state) {
