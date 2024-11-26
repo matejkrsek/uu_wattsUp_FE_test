@@ -20,16 +20,18 @@ const Styles = styled.div`
   }
 `;
 
-const DateRangePicker = ({ value, onDateRangeChange }) => {
-  const [dateRange, setDateRange] = useState(value || [null, null]);
+const DateRangePicker = ({ value, onDatesChange }) => {
+  const [dates, setDates] = useState(value || [null, null]); // DatePicker vyžaduje stav jako pole dvou hodnot...
+  
 
   useEffect(() => {
-    setDateRange(value); // Sync state with prop changes
+    setDates(value); // Sync state with prop changes
   }, [value]);
 
-  const handleChange = (update) => {
-    setDateRange(update);
-    onDateRangeChange(update); // Notify parent component
+  const handleChange = (update) => { // update je pole dvou hodnot [startDate, endDate]
+    setDates(update);
+    onDatesChange(update); // Notify parent component
+    
   };
 
   return (
@@ -39,8 +41,8 @@ const DateRangePicker = ({ value, onDateRangeChange }) => {
           showIcon
           icon="fa fa-calendar"
           selectsRange
-          startDate={dateRange[0]}
-          endDate={dateRange[1]}
+          startDate={dates[0]} // DatePicker vyžaduje stav jako pole dvou hodnot...
+          endDate={dates[1]}
           onChange={handleChange}
           isClearable
           placeholderText="Filter dates"

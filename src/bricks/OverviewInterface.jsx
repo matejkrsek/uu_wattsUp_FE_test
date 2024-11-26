@@ -7,7 +7,7 @@ import FilterButton from "./FilterButton";
 
 const OverviewInterface = () => {
   const [search, setSearch] = useState(""); // State for search input
-  const [dates, setDates] = useState([null, null]); // State for date range
+  const [dates, setDates] = useState([]); // State for dates (datepicker requires an arrray)
 
   // Function to update the search state when it changes
   const handleSearchChange = (value) => {
@@ -15,8 +15,8 @@ const OverviewInterface = () => {
   };
 
   // Function to update the date range when it changes
-  const handleDateRangeChange = (range) => {
-    setDates(range);
+  const handleDatesChange = (dates) => {
+    setDates(dates);
   };
 
   return (
@@ -33,7 +33,7 @@ const OverviewInterface = () => {
        
         <SearchInput value={search} onSearchChange={handleSearchChange} />
 
-        <DateRangePicker value={dates} onDateRangeChange={handleDateRangeChange} />
+        <DateRangePicker value={dates} onDatesChange={handleDatesChange} />
 
         <FilterButton search={search} dates={dates} />
 
