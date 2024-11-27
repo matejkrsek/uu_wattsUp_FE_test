@@ -19,6 +19,8 @@ function Tile({ project, users }) {
           <u>{"Created by:"}:</u> {createdByUser ? createdByUser.name : "Unknown"}
           <br />
           <u>{"Event date:"}:</u> {project.date}
+          <br />
+          <u>{"School:"}:</u> {project.school}
         </div>
         <br />
       </Card.Body>
