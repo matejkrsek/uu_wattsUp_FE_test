@@ -1,8 +1,11 @@
   import React, { useState } from "react";
   import { Button, Modal, Form, Row, Col } from "react-bootstrap";
   import { useProject } from "../ProjectProvider";
+import { useForm } from "react-hook-form";
 
   const CreateProject = () => {
+
+    const {register, handleSubmit} = useForm();
     const [isModalShown, setIsModalShown] = useState(false);
 
     const [formData, setFormData] = useState({
@@ -13,7 +16,7 @@
       description: "",
       createdBy: "",
       student: "",
-      round: "",
+      rounds: "",
       generators: [], // Array to store selected generator IDs
       status: true,
     });
@@ -38,9 +41,11 @@
 
     const { createProject } = useProject();
 
-    const testCreate = () => {
-    console.log(formData);
+    const handleCreate = (data) => {
+      console.log(data)
       createProject(formData);
+
+      // zde dle response? nebo Context state? v případě kladné odpovědi zavřít formulář a vyhodit toast "success, project byl vytvořen"
       setIsModalShown(false);
     }
 
@@ -52,17 +57,19 @@
         </Button>
 
         <Modal size="lg" show={isModalShown} onHide={() => setIsModalShown(false)}>
+        <Form onSubmit={handleSubmit(handleCreate)}>
           <Modal.Header closeButton>
             <Modal.Title>Create new project</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <Form>
+           
               {/* Project Name */}
               <Form.Group as={Row} className="mb-3">
                 <Form.Label column sm="2">Project Name</Form.Label>
                 <Col sm="10">
                   <Form.Control
+                  {...register("name")}
                     required
                     type="text"
                     placeholder="Name of the project"
@@ -79,6 +86,7 @@
                 <Form.Label column sm="2">School</Form.Label>
                 <Col sm="10">
                   <Form.Control
+                  {...register("school")}
                     required
                     type="text"
                     placeholder="Name of the school"
@@ -95,13 +103,14 @@
                 <Form.Label column sm="2">Rounds</Form.Label>
                 <Col sm="10">
                   <Form.Control
+                  {...register("rounds")}
                     required
                     type="number"
                     placeholder="Number of power production rounds"
-                    value={formData.round}
+                    value={formData.rounds}
                     min={1}
                     max={10}
-                    onChange={(e) => setFormData({ ...formData, round: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, rounds: e.target.value })}
                   />
                 </Col>
               </Form.Group>
@@ -111,6 +120,8 @@
                 <Form.Label>Generators</Form.Label>
                 {generators.map((generator) => (
                   <Form.Check
+                  // {...register("rounds")}
+                 // required
                     key={generator.id}
                     type="checkbox"
                     label={generator.name}
@@ -119,17 +130,18 @@
                   />
                 ))}
               </Form.Group>
-            </Form>
+             
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="success" onClick={testCreate}>
+            <Button type="submit" variant="success" > 
               Save
             </Button>
             <Button variant="outline-secondary" onClick={() => setIsModalShown(false)}>
               Cancel
             </Button>
           </Modal.Footer>
+          </Form>
         </Modal>
       </div>
     );

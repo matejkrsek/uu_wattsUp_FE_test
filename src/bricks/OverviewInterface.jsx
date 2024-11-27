@@ -27,7 +27,7 @@ const OverviewInterface = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
-          gap: "3px",
+          gap: "10px",
         }}
       >
        
@@ -36,8 +36,8 @@ const OverviewInterface = () => {
         <DateRangePicker value={dates} onDatesChange={handleDatesChange} />
 
         <FilterButton search={search} dates={dates} />
-
-        <CreateProject />
+<div style={{marginLeft:"100px"}}> <CreateProject /></div>
+       
       </div>
     </div>
   );
