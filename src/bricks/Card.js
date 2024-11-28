@@ -12,7 +12,8 @@ function Tile({ project, users }) {
       }; */
 
   return (
-    <Card>
+    <Card  style={{ cursor: "pointer" }} onClick={() => navigate(`/project/${project.id}`)}> 
+
       <Card.Body>
         <strong> {project.name} </strong> <br /> <br />
         <div style={{ textAlign: "left" }}>

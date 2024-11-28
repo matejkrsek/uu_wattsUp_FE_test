@@ -1,5 +1,5 @@
 import React from "react";
-import { useFilters } from "../FiltersProvider";
+import { useFilters } from "../../FiltersProvider";
 import { Button } from "react-bootstrap";
 
 const FilterButton = ({ search, dates}) => {

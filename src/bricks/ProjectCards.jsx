@@ -1,5 +1,5 @@
 import React from "react";
-import Tile from "./Card";
+import Tile from "./OverviewInterface/Card";
 
 const ProjectCards = ({ projects, users }) => {
 

@@ -1,6 +1,6 @@
   import React, { useState } from "react";
   import { Button, Modal, Form, Row, Col } from "react-bootstrap";
-  import { useProject } from "../ProjectProvider";
+  import { useProject } from "../../ProjectProvider";
 import { useForm } from "react-hook-form";
 
   const CreateProject = () => {

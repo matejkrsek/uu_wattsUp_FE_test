@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useFilters } from "../FiltersProvider";
+import { useFilters } from "../../FiltersProvider";
 
-const SearchInput = ({ value, onSearchChange, onApplyFilters }) => {
+const SearchInput = ({ value, onSearchChange, onApplyFiltersByEnter }) => {
   const { filters } = useFilters();
-  const [search, setSearch] = useState(value || filters.search || "");
+  const [search, setSearch] = useState(filters.search || value || "");
 
   useEffect(() => {
-    setSearch(value);
-  }, [value]);
+    setSearch(search);
+  }, [search]);
 
   const handleChange = (e) => {
     const newValue = e.target.value;
@@ -17,7 +17,7 @@ const SearchInput = ({ value, onSearchChange, onApplyFilters }) => {
 
   const handleKeyDown = (e) => {  // zastřešuje filtraci na stisknutí ENTER klávesy
     if (e.key === "Enter") {
-      onApplyFilters(search); // Call the function to apply filters
+      onApplyFiltersByEnter(search); // Call the function to apply filters
     }
   };
 

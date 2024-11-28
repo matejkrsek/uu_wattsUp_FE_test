@@ -24,7 +24,7 @@ root.render(
           <Routes>
             <Route path="/" element={<App />}>
               <Route index element={<OverviewR />} />
-              <Route path="/project" element={<ProjectR />} />
+              <Route path="/project/:projectId" element={<ProjectR />} />
               <Route path="/overview" element={<OverviewR />} />
               <Route path="/settings" element={<SettingsR />} />
               <Route path="/login" element={<LoginR />} />
