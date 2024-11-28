@@ -2,19 +2,16 @@
     {
         "id": "123_1",
         "projectId": "123",
-        "status": false,
-        "energy": 12
+        "status": false
     },
     {
         "id": "123_2",
         "projectId": "123",
-        "status": false,
-        "energy": 20
+        "status": false
     },
     {
         "id": "123_3",
         "projectId": "123",
-        "status": true,
-        "energy": null
+        "status": true
     }
 ]

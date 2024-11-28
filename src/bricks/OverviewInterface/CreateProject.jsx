@@ -1,7 +1,7 @@
   import React, { useState } from "react";
   import { Button, Modal, Form, Row, Col } from "react-bootstrap";
-  import { useProject } from "../../ProjectProvider";
-import { useForm } from "react-hook-form";
+  import { useProject } from "../ProjectProvider";
+  import { useForm } from "react-hook-form";
 
   const CreateProject = () => {
 
@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
       id: "",
       name: "",
       date: "2032-41-5", // FIX ME
-      school: "",
+      organization: "",
       description: "",
       createdBy: "",
       student: "",
@@ -81,19 +81,19 @@ import { useForm } from "react-hook-form";
                 </Col>
               </Form.Group>
 
-              {/* School */}
+              {/* organization */}
               <Form.Group as={Row} className="mb-3">
-                <Form.Label column sm="2">School</Form.Label>
+                <Form.Label column sm="2">Organization</Form.Label>
                 <Col sm="10">
                   <Form.Control
-                  {...register("school")}
+                  {...register("organization")}
                     required
                     type="text"
-                    placeholder="Name of the school"
-                    value={formData.school}
+                    placeholder="Name of the organization"
+                    value={formData.organization}
                     minLength={3}
                     maxLength={50}
-                    onChange={(e) => setFormData({ ...formData, school: e.target.value })}
+                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
                   />
                 </Col>
               </Form.Group>
