@@ -41,7 +41,7 @@ const ProjectDetail = () => {
         <strong>Event Date:</strong> {project.date}
       </p>
       <p>
-        <strong>School:</strong> {project.organization}
+        <strong>Organization:</strong> {project.organization}
       </p>
     </div>
   );
