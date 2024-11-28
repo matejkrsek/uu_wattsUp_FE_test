@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useFilters } from "../../FiltersProvider";
+import { useFilters } from "../FiltersProvider";
 
 const SearchInput = ({ value, onSearchChange, onApplyFiltersByEnter }) => {
   const { filters } = useFilters();

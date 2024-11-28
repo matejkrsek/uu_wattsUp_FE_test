@@ -4,7 +4,7 @@ import DateRangePicker from "./DateRangePicker";
 import SearchInput from "./SearchInput";
 import CreateProject from "./CreateProject";
 import FilterButton from "./FilterButton";
-import { useFilters } from "../../FiltersProvider";
+import { useFilters } from "../FiltersProvider";
 
 const OverviewInterface = () => {
   const [search, setSearch] = useState(""); // State for search input

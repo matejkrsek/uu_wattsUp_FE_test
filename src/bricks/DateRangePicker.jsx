@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import styled from "styled-components";
-import { useFilters } from "../../FiltersProvider";
+import { useFilters } from "../FiltersProvider";
 
 // Enables overriding the default CSS attributes of the DatePicker
 const Styles = styled.div`

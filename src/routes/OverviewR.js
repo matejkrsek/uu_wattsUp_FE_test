@@ -4,7 +4,7 @@ import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 
 import ProjectCards from "../bricks/ProjectCards";
-import OverviewInterface from "../bricks/OverviewInterface/OverviewInterface";
+import OverviewInterface from "../bricks/OverviewInterface";
 import { useProject } from "../ProjectProvider";
 import { useData } from "../DataProvider";
 import { useFilters } from "../FiltersProvider";

@@ -1,10 +1,9 @@
 import React from "react";
-<<<<<<< HEAD
-import Tile from "./OverviewInterface/Card";
-=======
-import { Button, Form, Navbar } from "react-bootstrap";
+
 import Tile from "./Card";
->>>>>>> ac6d2b885b9d155cfa1699895d0c9f84511798af
+
+import { Button, Form, Navbar } from "react-bootstrap";
+
 
 const ProjectCards = ({ projects, users }) => {
 
