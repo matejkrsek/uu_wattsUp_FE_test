@@ -20,7 +20,7 @@ function Tile({ project, users }) {
           <br />
           <u>{"Event date:"}:</u> {project.date}
           <br />
-          <u>{"School:"}:</u> {project.school}
+          <u>{"School:"}:</u> {project.organization}
         </div>
         <br />
       </Card.Body>

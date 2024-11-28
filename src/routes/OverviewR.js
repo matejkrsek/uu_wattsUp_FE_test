@@ -80,14 +80,13 @@ const filteredProjects = projects.filter((project) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        marginTop: "100px",
-        marginLeft: "50px",
+        marginTop: "55px",
         gap: "15px",
       }}
     >
+      {getChild()}
       <OverviewInterface />
       <br />
-      {getChild()}
     </div>
   );
 }
