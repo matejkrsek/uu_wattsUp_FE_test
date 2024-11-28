@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useFilters } from "../FiltersProvider";
+import { useFilters } from "../../FiltersProvider";
 
 const SearchInput = ({ value, onSearchChange, onApplyFiltersByEnter }) => {
   const { filters } = useFilters();
@@ -15,7 +15,8 @@ const SearchInput = ({ value, onSearchChange, onApplyFiltersByEnter }) => {
     onSearchChange(newValue); // Notify parent component
   };
 
-  const handleKeyDown = (e) => {  // zastřešuje filtraci na stisknutí ENTER klávesy
+  const handleKeyDown = (e) => {
+    // zastřešuje filtraci na stisknutí ENTER klávesy
     if (e.key === "Enter") {
       onApplyFiltersByEnter(search); // Call the function to apply filters
     }

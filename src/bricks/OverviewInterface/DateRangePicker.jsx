@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import styled from "styled-components";
-import { useFilters } from "../FiltersProvider";
+import { useFilters } from "../../FiltersProvider";
 
 // Enables overriding the default CSS attributes of the DatePicker
 const Styles = styled.div`
@@ -21,19 +21,20 @@ const Styles = styled.div`
 `;
 
 const DateRangePicker = ({ value, onDatesChange }) => {
-  const { filters} = useFilters();
-  const [dates, setDates] = useState([filters.startDate, filters.endDate] || value || [null, null]); // DatePicker vyžaduje stav jako pole dvou hodnot...
-  
+  const { filters } = useFilters();
+  const [dates, setDates] = useState(
+    [filters.startDate, filters.endDate] || value || [null, null]
+  ); // DatePicker vyžaduje stav jako pole dvou hodnot...
 
   useEffect(() => {
     console.log(filters);
     setDates([filters.startDate, filters.endDate]); // Sync state with prop changes
   }, [filters.startDate, filters.endDate]);
 
-  const handleChange = (update) => { // update je pole dvou hodnot [startDate, endDate]
+  const handleChange = (update) => {
+    // update je pole dvou hodnot [startDate, endDate]
     setDates(update);
     onDatesChange(update); // Notify parent component
-    
   };
 
   return (

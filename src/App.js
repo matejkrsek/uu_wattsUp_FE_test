@@ -31,6 +31,7 @@ function App() {
         className="mb-3"
         bg="dark"
         variant="dark"
+        
       >
         <Container fluid>
           <Navbar.Brand onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
@@ -61,6 +62,7 @@ function App() {
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
+      <br></br>
 
       <Outlet />
     </div>
