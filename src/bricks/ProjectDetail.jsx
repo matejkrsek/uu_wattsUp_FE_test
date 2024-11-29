@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { loadProjects } from "../calls"; // Import API funkce (mock nebo real)
+import { Button } from "react-bootstrap";
+import ProjectModal from "./OverviewInterface/ProjectModal";
 
 const ProjectDetail = () => {
   const { projectId } = useParams(); // Získání ID z URL
-  const [project, setProject] = useState(null); // Stav pro uložení dat projektu
+  const [project, setProject] = useState({
+    id: "",
+    name: "",
+    date: "2032-41-5", // FIX ME
+    organization: "",
+    description: "",
+    createdBy: "",
+    student: "",
+    rounds: "",
+    generatorList: ["a", "b"], // Array to store selected generator IDs
+    status: true,
+  }); // Stav pro uložení dat projektu
   const [loading, setLoading] = useState(true); // Stav pro načítání
   const [error, setError] = useState(null); // Stav pro chybu
+
+  const [isModalShown, setIsModalShown] = useState(false);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -26,7 +41,7 @@ const ProjectDetail = () => {
     };
 
     fetchProject();
-  }, [projectId]);
+  }, [projectId, project]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -34,6 +49,7 @@ const ProjectDetail = () => {
   return (
     <div>
       <h1>{project.name}</h1>
+      <Button onClick={() => setIsModalShown(true)}>Edit</Button>
       <p>
         <strong>Created by:</strong> {project.createdBy}
       </p>
@@ -43,6 +59,13 @@ const ProjectDetail = () => {
       <p>
         <strong>Organization:</strong> {project.organization}
       </p>
+
+      <ProjectModal
+        setIsNewModalShown={setIsModalShown}
+        isNewModalShown={isModalShown}
+        incomingFormData={project}
+        incomingVersion="edit"
+      />
     </div>
   );
 };

@@ -1,12 +1,11 @@
 import React from "react";
-
 import Tile from "./Card";
 
-import { Button, Form, Navbar } from "react-bootstrap";
-
 const ProjectCards = ({ projects, users }) => {
+  //  console.log(projects);
+
   return (
-    <div className="d-flex flex-wrap gap-3" style={{ marginLeft: "10px" }}>
+    <div className="d-flex flex-wrap gap-3">
       {projects?.map((project) => (
         <Tile key={project.id} project={project} users={users} />
       ))}
