@@ -1,10 +1,11 @@
-import React, { useEffect, useContext, useState } from "react";
+import React from "react";
 import "../App.css";
+import Settings from "../bricks/Settings";
 
 function SettingsR() {
   return (
-    <div style={{ marginTop: "100px" }}>
-      "Routa - Settings routa (admin access only)"
+    <div style={{ marginTop: "70px" }}>
+      <Settings/>
     </div>
   );
 }

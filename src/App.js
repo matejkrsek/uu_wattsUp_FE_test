@@ -7,7 +7,8 @@ import Nav from "react-bootstrap/Nav";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import Icon from '@mdi/react'
+import Icon from '@mdi/react';
+import { mdiCogOutline } from '@mdi/js';
 
 function App() {
   const navigate = useNavigate();
@@ -48,6 +49,13 @@ function App() {
 
 
                 <span className='me-3'></span>
+
+                <Icon 
+                  path={mdiCogOutline} 
+                  size={1.2} 
+                  color="white"
+                  onClick={() => navigate('/settings')} style={{ cursor: 'pointer' }}
+                />
 
                 <Button
                   variant={"outline-light"}
