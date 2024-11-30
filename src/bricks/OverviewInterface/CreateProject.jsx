@@ -18,8 +18,14 @@ const CreateProject = () => {
   });
 
   return (
-    <div>
-      <Button variant="success" onClick={() => setIsNewModalShown(true)}> + </Button>
+    <div className="w-full md:w-auto">
+      <Button
+        variant="success"
+        className="w-full md:w-auto"
+        onClick={() => setIsNewModalShown(true)}
+      >
+        +
+      </Button>
 
       <ProjectModal
         isNewModalShown={isNewModalShown}

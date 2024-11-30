@@ -42,15 +42,11 @@ const OverviewInterface = () => {
       <Navbar bg="light" collapseOnSelect expand="sm">
         <div className="container-fluid">
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse style={{ justifyContent: "flex-end" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                gap: "5px",
-              }}
-            >
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            className="flex justify-center md:justify-end"
+          >
+            <div className="flex sm:flex-row flex-col justify-center md:justify-end gap-2">
               <SearchInput
                 value={search}
                 onSearchChange={handleSearchChange}
@@ -62,8 +58,7 @@ const OverviewInterface = () => {
                 onDatesChange={handleDatesChange}
               />
               <FilterButton search={search} dates={dates} />
-                {" "}
-                <CreateProject />
+              <CreateProject />
             </div>
           </Navbar.Collapse>
         </div>

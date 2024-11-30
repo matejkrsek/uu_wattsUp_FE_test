@@ -1,8 +1,8 @@
 import React from "react";
-import Icon from '@mdi/react';
+import Icon from "@mdi/react";
 import { useFilters } from "../../FiltersProvider";
 import { Button } from "react-bootstrap";
-import { mdiFilterOutline } from '@mdi/js';
+import { mdiFilterOutline } from "@mdi/js";
 
 const FilterButton = ({ search, dates }) => {
   const { setFilters } = useFilters();
@@ -12,9 +12,22 @@ const FilterButton = ({ search, dates }) => {
     setFilters(filters); // Update the filters state
   };
 
-  return <Button onClick={handleClick} size="sm">
-    <Icon path={mdiFilterOutline} size={0.8} />
-  </Button>;
+  return (
+    <Button
+      onClick={handleClick}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "auto", // or 'auto' for md
+        padding: "0.25rem", // equivalent to p-1 in Tailwind
+      }}
+    >
+      <Icon path={mdiFilterOutline} size={1} />
+    </Button>
+  );
 };
 
 export default FilterButton;
+
+//

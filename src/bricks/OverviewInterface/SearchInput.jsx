@@ -28,8 +28,8 @@ const SearchInput = ({ value, onSearchChange, onApplyFiltersByEnter }) => {
       className="form-control"
       style={{
         width: "80vw",
-        maxWidth: "400px",
-        minWidth: "300px",
+        maxWidth: "240px",
+        minWidth: "140px",
       }}
       placeholder="Search"
       value={search}
