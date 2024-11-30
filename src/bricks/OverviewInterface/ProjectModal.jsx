@@ -9,6 +9,7 @@ const ProjectModal = ({
   setIsNewModalShown,
   incomingVersion,
 }) => {
+
   const [formData, setFormData] = useState(
     incomingFormData || {
       id: "",
@@ -180,12 +181,6 @@ const ProjectModal = ({
           <Modal.Footer>
             <Button type="submit" variant="success">
               Save
-            </Button>
-            <Button
-              variant="outline-secondary"
-              onClick={() => setIsNewModalShown(false)}
-            >
-              Cancel
             </Button>
           </Modal.Footer>
         </Form>

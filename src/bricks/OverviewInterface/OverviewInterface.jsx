@@ -48,7 +48,7 @@ const OverviewInterface = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
-                gap: "10px",
+                gap: "5px",
               }}
             >
               <SearchInput
@@ -62,10 +62,8 @@ const OverviewInterface = () => {
                 onDatesChange={handleDatesChange}
               />
               <FilterButton search={search} dates={dates} />
-              <div style={{ marginLeft: "100px" }}>
                 {" "}
                 <CreateProject />
-              </div>
             </div>
           </Navbar.Collapse>
         </div>

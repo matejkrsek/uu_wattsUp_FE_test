@@ -5,23 +5,21 @@ import ProjectModal from "./ProjectModal";
 const CreateProject = () => {
   const [isNewModalShown, setIsNewModalShown] = useState(false);
   const [formData, setFormData] = useState({
-    id: "",
     name: "",
-    date: "2032-41-5", // FIX ME
+    date: "", // eventDate
     organization: "",
     description: "",
     createdBy: "",
     student: "",
-    rounds: "",
+    roundCount: "",
+    roundDuration: "",
+    studentCount: null,
     generatorList: [], // Array to store selected generator IDs
-    status: true,
   });
 
   return (
     <div>
-      <Button variant="success" onClick={() => setIsNewModalShown(true)}>
-        Create new modal
-      </Button>
+      <Button variant="success" onClick={() => setIsNewModalShown(true)}> + </Button>
 
       <ProjectModal
         isNewModalShown={isNewModalShown}
