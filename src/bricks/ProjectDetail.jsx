@@ -1,50 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { loadProjects } from "../calls"; // Import API funkce (mock nebo real)
 import { Button } from "react-bootstrap";
 import ProjectModal from "./OverviewInterface/ProjectModal";
+import { useProject } from "../ProjectProvider";
 
 const ProjectDetail = () => {
-  const { projectId } = useParams(); // Získání ID z URL
-  const [project, setProject] = useState({
-    id: "",
-    name: "",
-    date: "2032-41-5", // FIX ME
-    organization: "",
-    description: "",
-    createdBy: "",
-    student: "",
-    rounds: "",
-    generatorList: ["a", "b"], // Array to store selected generator IDs
-    status: true,
-  }); // Stav pro uložení dat projektu
-  const [loading, setLoading] = useState(true); // Stav pro načítání
-  const [error, setError] = useState(null); // Stav pro chybu
-
+  const { projectId } = useParams(); // Get projectId from URL
+  const { fetchProject, projects, status } = useProject(); // Access context values
+  const [project, setProject] = useState(null); // State for selected project
   const [isModalShown, setIsModalShown] = useState(false);
 
   useEffect(() => {
-    const fetchProject = async () => {
-      try {
-        setLoading(true);
-        const projects = await loadProjects(); // Zavolání funkce pro načtení projektů
-        const foundProject = projects.find(
-          (p) => p.id.toString() === projectId
-        ); // Najde projekt podle ID
-        if (!foundProject) throw new Error("Project not found");
-        setProject(foundProject);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+    // Ensure projects are loaded
+    if (status.state === "pending") {
+      fetchProject();
+    } else {
+      const foundProject = projects.find((p) => p.id.toString() === projectId);
+      setProject(foundProject || null);
+    }
+  }, [projectId, projects, fetchProject, status.state]);
 
-    fetchProject();
-  }, [projectId, project]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (status.state === "pending") return <div>Loading...</div>;
+  if (status.state === "error") return <div>Error loading projects.</div>;
+  if (!project) return <div>Project not found.</div>;
 
   return (
     <div>
