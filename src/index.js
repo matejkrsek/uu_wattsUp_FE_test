@@ -8,11 +8,12 @@ import App from "./App";
 
 import { ProjectProvider } from "./ProjectProvider";
 import { DataProvider } from "./DataProvider";
+import { FiltersProvider } from "./FiltersProvider";
+
 import ProjectR from "./routes/ProjectR";
 import OverviewR from "./routes/OverviewR";
 import LoginR from "./routes/LoginR";
 import SettingsR from "./routes/SettingsR";
-import { FiltersProvider } from "./FiltersProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,17 +21,17 @@ root.render(
     <ProjectProvider>
       <DataProvider>
         <FiltersProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<App />}>
-              <Route index element={<OverviewR />} />
-              <Route path="/project/:projectId" element={<ProjectR />} />
-              <Route path="/overview" element={<OverviewR />} />
-              <Route path="/settings" element={<SettingsR />} />
-              <Route path="/login" element={<LoginR />} />
-            </Route>
-          </Routes>
-        </Router>
+          <Router>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route index element={<OverviewR />} />
+                <Route path="/project/:id" element={<ProjectR />} />
+                <Route path="/overview" element={<OverviewR />} />
+                <Route path="/settings" element={<SettingsR />} />
+                <Route path="/login" element={<LoginR />} />
+              </Route>
+            </Routes>
+          </Router>
         </FiltersProvider>
       </DataProvider>
     </ProjectProvider>

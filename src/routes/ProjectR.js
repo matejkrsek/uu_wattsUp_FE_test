@@ -1,31 +1,26 @@
 import React, { useContext, useEffect } from "react";
 
 import "../App.css";
-import { Button } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
+import { useLocation } from "react-router-dom";
+import { useProject } from "../ProjectProvider";
 import ProjectDetail from "../bricks/ProjectDetail";
 
 
 function ProjectR() {
+  const params = useParams();
+  const location = useLocation();
+  const { fetchProject } = useProject();
+  const { project, createdByUser } = location.state;
 
-  const navigate = useNavigate(); 
-const params = useParams();
-
-  useEffect(() => {
-    // fetch Data
-  }, []);
-
-
+  console.log(project, createdByUser)
 
   return (
-   
 
+    <div style={{ marginTop: "50px" }}>
 
-    <div style={{ marginTop: "100px" }}>
+      <ProjectDetail project={project} createdByUser={createdByUser} />
 
-<Button onClick={() => navigate("/")}>Back</Button>
-      <ProjectDetail />
-    
     </div>
   );
 }
