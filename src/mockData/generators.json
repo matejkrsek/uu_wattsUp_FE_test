@@ -1,18 +1,22 @@
 [
     {
         "id": "a",
-        "name": "Hydroelectric Generator"
+        "name": "Hydroelectric Generator",
+        "description": "Description"
     },
     {
         "id": "b",
-        "name": "Wind Turbine Generator"
+        "name": "Wind Turbine Generator",
+        "description": "Description"
     },
     {
         "id": "c",
-        "name": "Solar Photovoltaic Generators"
+        "name": "Solar Photovoltaic Generators",
+        "description": "Description"
     },
     {
         "id": "d",
-        "name": "Universal"
+        "name": "Universal",
+        "description": "Description"
     }
 ]

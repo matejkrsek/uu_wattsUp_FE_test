@@ -1,0 +1,20 @@
+[
+    {
+        "id": "x",
+        "generatorId": "a",
+        "roundId": "123_1",
+        "totalEnergy": 143
+    },
+    {
+        "id": "y",
+        "generatorId": "b",
+        "roundId": "123_2",
+        "totalEnergy": 235
+    },
+    {
+        "id": "z",
+        "generatorId": "c",
+        "roundId": "123_3",
+        "totalEnergy": 421
+    }
+]

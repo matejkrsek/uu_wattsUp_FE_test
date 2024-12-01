@@ -2,16 +2,22 @@
     {
         "id": "123_1",
         "projectId": "123",
-        "status": false
+        "status": false,
+        "start": 1769344800000,
+        "end": 1769345400000
     },
     {
         "id": "123_2",
         "projectId": "123",
-        "status": false
+        "status": false,
+        "start": 1769352000000,
+        "end": 1769352600000
     },
     {
         "id": "123_3",
         "projectId": "123",
-        "status": true
+        "status": true,
+        "start": 1769359200000,
+        "end": 1769359800000
     }
 ]

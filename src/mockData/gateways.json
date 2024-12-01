@@ -1,14 +1,23 @@
 [
     {
         "id": "158",
-        "name": "Gateway 1"
+        "name": "Gateway 1",
+        "organization": "School",
+        "description": "Brief description of the gateway",
+        "password": "hash"
     },
     {
         "id": "269",
-        "name": "Gateway 2"
+        "name": "Gateway 2",
+        "organization": "School",
+        "description": "Brief description of the gateway",
+        "password": "hash"
     },
     {
         "id": "347",
-        "name": "Gateway 3"
+        "name": "Gateway 3",
+        "organization": "School",
+        "description": "Brief description of the gateway",
+        "password": "hash"
     }
 ]

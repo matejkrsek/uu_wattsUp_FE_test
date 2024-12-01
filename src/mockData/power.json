@@ -1,0 +1,23 @@
+[
+    {
+        "id": "xyz",
+        "generatorId": "a",
+        "roundId": "123_1",
+        "timestamp": 200,
+        "value": 143
+    },
+    {
+        "id": "zyx",
+        "generatorId": "b",
+        "roundId": "123_2",
+        "timestamp": 300,
+        "value": 235
+    },
+    {
+        "id": "yzx",
+        "generatorId": "c",
+        "roundId": "123_3",
+        "timestamp": 400,
+        "value": 421
+    }
+]

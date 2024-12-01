@@ -3,24 +3,28 @@
     "id": "111",
     "name": "Peter Admin",
     "role": "admin",
+    "organization": "School",
     "password": "hash"
   },
   {
     "id": "222",
     "name": "Stephen Instructor",
     "role": "instructor",
+    "organization": "School",
     "password": "hash"
   },
   {
     "id": "333",
     "name": "Students 1",
     "role": "student",
+    "organization": "School",
     "password": "hash"
   },
   {
     "id": "444",
     "name": "Gateway 1",
     "role": "gateway",
+    "organization": "School",
     "password": "hash"
   }
 ]
