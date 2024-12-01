@@ -29,7 +29,7 @@ function App() {
     <div className={`App`}>
       <Navbar
         fixed="top"
-        expand={"sm"}
+        expand
         className="mb-3"
         bg="dark"
         variant="dark"
@@ -62,7 +62,7 @@ function App() {
 
                 <Button
                   variant={"outline-light"}
-                  style={{ marginLeft: "30px" }}
+                  style={{ marginLeft: "15px" }}
                   onClick={user ? handleLogout : handleLogin}
                 >
                   {user ? "Logout" : "Login"}

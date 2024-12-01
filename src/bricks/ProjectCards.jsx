@@ -2,30 +2,19 @@ import React from "react";
 import Tile from "./Card";
 
 const ProjectCards = ({ projects, users }) => {
-
   return (
-
-<div
+    <div
       className="d-flex flex-wrap gap-3"
       style={{
-        minHeight: "100vh", // To ensure that the container takes full height
-        gap: "3px", // Smaller gap between cards
-        padding: "7px", // Add padding to create space from screen edges
+        minHeight: "100vh",
+        padding: "7px",
       }}
     >
-      {/* Media query for small screens */}
-      <div
-        className="d-flex flex-wrap gap-3"
-        style={{
-          minHeight: "100vh", // To ensure that the container takes full height
-        }}
-      >
       {projects?.map((project) => (
         <Tile key={project.id} project={project} users={users} />
       ))}
-    </div>
 
-    <style>
+      <style>
         {`
           @media (max-width: 570px) {
             .d-flex {
@@ -36,7 +25,6 @@ const ProjectCards = ({ projects, users }) => {
         `}
       </style>
     </div>
-
   );
 };
 
