@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import Icon from '@mdi/react';
+import { mdiPlus } from '@mdi/js';
+
 import ProjectModal from "./ProjectModal";
 
 const CreateProject = () => {
@@ -24,7 +27,7 @@ const CreateProject = () => {
         className="w-full md:w-auto"
         onClick={() => setIsNewModalShown(true)}
       >
-        +
+        <Icon path={mdiPlus} size={1} />
       </Button>
 
       <ProjectModal
