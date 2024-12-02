@@ -2,28 +2,27 @@ import "./App.css";
 import "./output.css";
 
 import React, { useState, useContext } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import Icon from "@mdi/react";
-import { mdiCogOutline } from "@mdi/js";
+import Icon from '@mdi/react';
+import { mdiCogOutline, mdiLogout } from "@mdi/js";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState(null);
-
-  const handleLogin = () => {
-    navigate("/login");
-  };
 
   const handleLogout = () => {
     setUser(null);
     navigate("/");
   };
+
+  const hideIcons = location.pathname === "/" || location.pathname === "/login";
 
   return (
     <div className={`App`}>
@@ -36,7 +35,7 @@ function App() {
       >
         <Container fluid>
           <Navbar.Brand
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/overview")}
             style={{ cursor: "pointer" }}
           >
             W a t t s U p
@@ -51,22 +50,23 @@ function App() {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3 d-flex align-items-center">
                 <span className="me-3"></span>
-
-                <Icon
-                  path={mdiCogOutline}
-                  size={1.2}
-                  color="white"
-                  onClick={() => navigate("/settings")}
-                  style={{ cursor: "pointer" }}
-                />
-
-                <Button
-                  variant={"outline-light"}
-                  style={{ marginLeft: "15px" }}
-                  onClick={user ? handleLogout : handleLogin}
-                >
-                  {user ? "Logout" : "Login"}
-                </Button>
+                {!hideIcons && ( // Skryte ikonky ak je na specific route
+                  <>
+                    <Icon
+                      path={mdiCogOutline}
+                      size={1.2}
+                      color="white"
+                      onClick={() => navigate("/settings")}
+                      style={{ cursor: "pointer" }}
+                    />
+                    <Icon
+                      path={mdiLogout}
+                      size={1}
+                      color="white"
+                      style={{ marginLeft: "10px", cursor: "pointer" }}
+                      onClick={handleLogout}                    />
+                  </>
+                )}
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

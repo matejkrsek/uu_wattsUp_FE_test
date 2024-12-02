@@ -67,7 +67,8 @@ const LoginForm = () => {
             }}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit"  onClick={() => navigate("/overview")}
+        >
           Login
         </Button>
       </Form>
