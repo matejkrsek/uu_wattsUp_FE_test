@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { Button } from "react-bootstrap";
 import ProjectModal from "./OverviewInterface/ProjectModal";
 import { useProject } from "../ProjectProvider";
+import DeleteModal from "./DeleteModal";
 
 const ProjectDetail = ({ project, createdByUser }) => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const ProjectDetail = ({ project, createdByUser }) => {
   //const { fetchProject, projects, status } = useProject(); // Access context values
   //const [project, setProject] = useState(null); // State for selected project
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
 
   /*   useEffect(() => {
       // Ensure projects are loaded
@@ -25,30 +27,38 @@ const ProjectDetail = ({ project, createdByUser }) => {
     if (status.state === "error") return <div>Error loading projects.</div>;
     if (!project) return <div>Project not found.</div>;*/
 
+  const handleDelete = () => {
+    // open modal
+  };
   return (
     <div>
-      <div style={{ display: "flex", gap: "10px", alignItems: "center", justifyContent: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Button onClick={() => setIsModalShown(true)}>Edit</Button>
-        <Button variant= "outline-secondary" onClick={() => navigate("/")}>Back</Button>
+        <Button onClick={() => setIsDeleteModalShown(true)}>Delete</Button>
+        <Button variant="outline-secondary" onClick={() => navigate("/")}>
+          Back
+        </Button>
       </div>
       <br />
-      <h1>{project.name}</h1>
-      <br />
-      <p>
-        <strong>Created by:</strong> {createdByUser.name}
-      </p>
-      <p>
-        <strong>Event Date:</strong> {project.date}
-      </p>
-      <p>
-        <strong>Organization:</strong> {project.organization}
-      </p>
 
+      {/*org, instruktor, count of students, description*/}
       <ProjectModal
         setIsNewModalShown={setIsModalShown}
         isNewModalShown={isModalShown}
         incomingFormData={project}
         incomingVersion="edit"
+      />
+
+      <DeleteModal
+        isShown={isDeleteModalShown}
+        setIsShown={setIsDeleteModalShown}
       />
     </div>
   );

@@ -9,8 +9,8 @@ import Nav from "react-bootstrap/Nav";
 import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import Icon from '@mdi/react';
-import { mdiCogOutline, mdiLogout } from "@mdi/js";
+import Icon from "@mdi/react";
+import { mdiCogOutline, mdiHomeCircle, mdiHoopHouse, mdiLogout } from "@mdi/js";
 
 function App() {
   const navigate = useNavigate();
@@ -26,13 +26,7 @@ function App() {
 
   return (
     <div className={`App`}>
-      <Navbar
-        fixed="top"
-        expand
-        className="mb-3"
-        bg="dark"
-        variant="dark"
-      >
+      <Navbar fixed="top" expand className="mb-3" bg="dark" variant="dark">
         <Container fluid>
           <Navbar.Brand
             onClick={() => navigate("/overview")}
@@ -53,18 +47,26 @@ function App() {
                 {!hideIcons && ( // Skryte ikonky ak je na specific route
                   <>
                     <Icon
+                      path={mdiHomeCircle}
+                      size={1.2}
+                      color="white"
+                      onClick={() => navigate("/overview")}
+                      style={{ cursor: "pointer" }}
+                    />
+                    <Icon
                       path={mdiCogOutline}
                       size={1.2}
                       color="white"
                       onClick={() => navigate("/settings")}
-                      style={{ cursor: "pointer" }}
+                      style={{ marginLeft: "10px", cursor: "pointer" }}
                     />
                     <Icon
                       path={mdiLogout}
                       size={1}
                       color="white"
                       style={{ marginLeft: "10px", cursor: "pointer" }}
-                      onClick={handleLogout}                    />
+                      onClick={handleLogout}
+                    />
                   </>
                 )}
               </Nav>
