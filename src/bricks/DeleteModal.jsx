@@ -19,14 +19,13 @@ const DeleteModal = ({ project, isShown, setIsShown }) => {
   const handleDelete = async () => {
     try {
       await deleteProject(project);
-      console.log("Success from FE");
       setIsSuccessToastShown(true);
 
       // Start countdown
       const countdownInterval = setInterval(() => {
         setCountdown((prev) => {
           if (prev === 1) {
-            clearInterval(countdownInterval);
+            clearInterval(countdownInterval); // ukončuje setInverval funkci
             navigate("/overview");
           }
           return prev - 1;
@@ -34,7 +33,6 @@ const DeleteModal = ({ project, isShown, setIsShown }) => {
       }, 1000);
     } catch (error) {
       setIsErrorToastShown(true);
-      console.log("Error on FE:", error);
     } finally {
       setIsShown(false);
     }

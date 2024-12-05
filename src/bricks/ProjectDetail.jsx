@@ -39,7 +39,10 @@ const ProjectDetail = ({ project, createdByUser }) => {
       >
         <Button onClick={() => setIsModalShown(true)}>Edit</Button>
         <Button onClick={() => setIsDeleteModalShown(true)}>Delete</Button>
-        <Button variant="outline-secondary" onClick={() => navigate("/")}>
+        <Button
+          variant="outline-secondary"
+          onClick={() => navigate("/overview")}
+        >
           Back
         </Button>
       </div>
