@@ -37,7 +37,7 @@ function Tile({ project, users }) {
           <div style={{ marginBottom: "7px" }}>
             {format(new Date(project.date), "dd.MM.yyyy")}
           </div>
-          <u>{"School:"}</u>
+          <u>{"Organization:"}</u>
           {project.organization}
         </Card.Body>
       </Card>
