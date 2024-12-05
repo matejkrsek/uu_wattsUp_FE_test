@@ -1,5 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
-import { loadProjects, createProject, updateProject, deleteProject } from "./calls";
+import {
+  loadProjects,
+  createProject,
+  updateProject,
+  deleteProject,
+} from "./calls";
 
 const ProjectContext = createContext();
 
@@ -50,8 +55,10 @@ export function ProjectProvider({ children }) {
       await deleteProject(requestData);
       callback && callback();
       fetchProject();
+      console.log("success");
     } catch (error) {
       console.error("Error deleting project:", error);
+      throw error;
     }
   };
 

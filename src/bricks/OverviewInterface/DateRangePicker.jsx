@@ -27,7 +27,6 @@ const DateRangePicker = ({ value, onDatesChange }) => {
   ); // DatePicker vyžaduje stav jako pole dvou hodnot...
 
   useEffect(() => {
-    console.log(filters);
     setDates([filters.startDate, filters.endDate]); // Sync state with prop changes
   }, [filters.startDate, filters.endDate]);
 
