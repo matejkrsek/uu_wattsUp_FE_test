@@ -8,7 +8,7 @@ import DeleteModal from "./DeleteModal";
 const ProjectDetail = ({ project, createdByUser }) => {
   const navigate = useNavigate();
   const { projectId } = useParams(); // Get projectId from URL
-  //const { fetchProject, projects, status } = useProject(); // Access context values
+  // const {, fetchProject, status } = useProject(); // Access context values
   //const [project, setProject] = useState(null); // State for selected project
   const [isModalShown, setIsModalShown] = useState(false);
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
@@ -27,9 +27,6 @@ const ProjectDetail = ({ project, createdByUser }) => {
     if (status.state === "error") return <div>Error loading projects.</div>;
     if (!project) return <div>Project not found.</div>;*/
 
-  const handleDelete = () => {
-    // open modal
-  };
   return (
     <div>
       <div
@@ -46,6 +43,8 @@ const ProjectDetail = ({ project, createdByUser }) => {
           Back
         </Button>
       </div>
+      <div>CONTENT {project.name}</div>
+
       <br />
 
       {/*org, instruktor, count of students, description*/}
@@ -57,6 +56,7 @@ const ProjectDetail = ({ project, createdByUser }) => {
       />
 
       <DeleteModal
+        project={project}
         isShown={isDeleteModalShown}
         setIsShown={setIsDeleteModalShown}
       />
