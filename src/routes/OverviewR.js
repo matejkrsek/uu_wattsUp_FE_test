@@ -11,7 +11,7 @@ import { useFilters } from "../FiltersProvider";
 
 function OverviewR() {
   const { status, projects, fetchProject } = useProject();
-  const { users } = useData();
+  const { users, generators } = useData();
   const { filters } = useFilters();
 
   useEffect(() => {
@@ -57,6 +57,7 @@ function OverviewR() {
             <ProjectCards
               projects={filteredProjects}
               users={users}
+              generators={generators}
               onLoadSuccess={updateProject}
             />
           </>

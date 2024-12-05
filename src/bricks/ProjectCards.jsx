@@ -1,7 +1,7 @@
 import React from "react";
 import Tile from "./Card";
 
-const ProjectCards = ({ projects, users }) => {
+const ProjectCards = ({ projects, users, generators }) => {
   return (
     <div
       className="d-flex flex-wrap gap-3"
@@ -11,7 +11,7 @@ const ProjectCards = ({ projects, users }) => {
       }}
     >
       {projects?.map((project) => (
-        <Tile key={project.id} project={project} users={users} />
+        <Tile key={project.id} project={project} users={users} generators={generators} />
       ))}
 
       <style>

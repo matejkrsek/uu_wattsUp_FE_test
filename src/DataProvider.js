@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Načítanie dát priamo zo statických JSON súborov
 import usersData from "./mockData/users.json";
+import energyData from "./mockData/energy.json";
 import generatorsData from "./mockData/generators.json";
 import roundsData from "./mockData/rounds.json";
 import gatewaysData from "./mockData/gateways.json";
@@ -12,6 +13,7 @@ export function DataProvider({ children }) {
   const [users, setUsers] = useState([]);
   const [generators, setGenerators] = useState([]);
   const [rounds, setRounds] = useState([]);
+  const [energy, setEnergy] = useState([]);
   const [gateways, setGateways] = useState([]);
   const [status, setStatus] = useState("pending");
 
@@ -24,6 +26,7 @@ export function DataProvider({ children }) {
         setGenerators(generatorsData);
         setRounds(roundsData);
         setGateways(gatewaysData);
+        setEnergy(energyData);
 
         setStatus("success");
       } catch (error) {
@@ -39,6 +42,7 @@ export function DataProvider({ children }) {
     <DataContext.Provider
       value={{
         users,
+        energy,
         generators,
         rounds,
         gateways,

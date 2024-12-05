@@ -14,6 +14,7 @@ import { FiltersProvider } from "./FiltersProvider";
 
 import ProjectR from "./routes/ProjectR";
 import OverviewR from "./routes/OverviewR";
+import RoundR from "./routes/RoundR";
 import LoginR from "./routes/LoginR";
 import SettingsR from "./routes/SettingsR";
 
@@ -28,6 +29,7 @@ root.render(
               <Route path="/" element={<App />}>
                 <Route index element={<LoginR />} />
                 <Route path="/project/:id" element={<ProjectR />} />
+                <Route path="/round/:id" element={<RoundR />} />
                 <Route path="/overview" element={<OverviewR />} />
                 <Route path="/settings" element={<SettingsR />} />
                 <Route path="/login" element={<LoginR />} />

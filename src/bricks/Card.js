@@ -5,7 +5,7 @@ import { Card, Button } from "react-bootstrap";
 
 function Tile({ project, users }) {
   const navigate = useNavigate();
-  const createdByUser = users.find((user) => user.id === project.createdBy);
+  const instructor = users.find((user) => user.id === project.instructor);
 
   return (
     <div>
@@ -17,7 +17,7 @@ function Tile({ project, users }) {
           height: "330px",
           overflow: "hidden", // Hide overflow if content exceeds
         }}
-        onClick={() => navigate(`/project/${project.id}`, { state: { project, createdByUser } })}
+        onClick={() => navigate(`/project/${project.id}`, { state: { project, instructor } })}
       >
         <Card.Body
           style={{
@@ -29,9 +29,9 @@ function Tile({ project, users }) {
           }}
         >
           <strong style={{ fontSize: "20px", marginBottom: "13px" }}> {project.name} </strong>
-          <u>{"Created by:"}</u>
+          <u>{"Instructor:"}</u>
           <div style={{ marginBottom: "7px" }}>
-            {createdByUser ? createdByUser.name : "Unknown"}
+            {instructor ? instructor.name : "Unknown"}
           </div>
           <u>{"Event date:"}</u>
           <div style={{ marginBottom: "7px" }}>

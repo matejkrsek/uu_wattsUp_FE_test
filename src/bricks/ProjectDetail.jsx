@@ -1,53 +1,98 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Button } from "react-bootstrap";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import { Bar } from "react-chartjs-2";
+
 import ProjectModal from "./OverviewInterface/ProjectModal";
-import { useProject } from "../ProjectProvider";
 import DeleteModal from "./DeleteModal";
 
-const ProjectDetail = ({ project, createdByUser }) => {
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+
+const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
   const navigate = useNavigate();
-  const { projectId } = useParams(); // Get projectId from URL
-  // const {, fetchProject, status } = useProject(); // Access context values
-  //const [project, setProject] = useState(null); // State for selected project
+  const { projectId } = useParams();
   const [isModalShown, setIsModalShown] = useState(false);
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
 
-  /*   useEffect(() => {
-      // Ensure projects are loaded
-      if (status.state === "pending") {
-        fetchProject();
-      } else {
-        const foundProject = projects.find((p) => p.id.toString() === projectId);
-        setProject(foundProject || null);
-      }
-    }, [projectId, projects, fetchProject, status.state]); 
-  
-    if (status.state === "pending") return <div>Loading...</div>;
-    if (status.state === "error") return <div>Error loading projects.</div>;
-    if (!project) return <div>Project not found.</div>;*/
+  const filteredRounds = rounds.filter((round) => round.projectId === project.id);
+  const filteredGenerators = generators.filter((generator) =>
+    project.generatorList.includes(generator.id)
+  );
+
+  // Funkcia na filtrovanie energie podľa kôl
+  const getEnergyForRound = (roundId) => {
+    return energy.filter((entry) => entry.roundId === roundId);
+  };
+
+  // Funkcia na prípravu dát pre Bar chart
+  const prepareChartData = (roundId) => {
+    const roundEnergy = getEnergyForRound(roundId);
+
+    const labels = filteredGenerators.map((generator) => generator.name);
+    const data = filteredGenerators.map((generator) => {
+      const energyEntry = roundEnergy.find((entry) => entry.generatorId === generator.id);
+      return energyEntry ? energyEntry.totalEnergy : 0; // Ak nie je energia, nastavíme 0
+    });
+
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: "Total Energy",
+          data: data,
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+        },
+      ],
+    };
+  };
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          gap: "10px",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Button onClick={() => setIsModalShown(true)}>Edit</Button>
-        <Button onClick={() => setIsDeleteModalShown(true)}>Delete</Button>
-        <Button variant="outline-secondary" onClick={() => navigate("/")}>
-          Back
-        </Button>
+    <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
+      <div style={{ display: "flex", gap: "10px", justifyContent: "right" }}>
+        <Button size="sm" onClick={() => setIsModalShown(true)}>Edit</Button>
+        <Button size="sm" onClick={() => setIsDeleteModalShown(true)}>Delete</Button>
+        <Button size="sm" variant="outline-secondary" onClick={() => navigate("/overview")}>Back</Button>
       </div>
-      <div>CONTENT {project.name}</div>
-
       <br />
 
-      {/*org, instruktor, count of students, description*/}
+      <div>
+        <h1>{project.name}</h1>
+        <h4>{project.date}</h4>
+      </div>
+
+      <div style={{ textAlign: "left" }}>
+        <p><b>Organization: </b>{project.organization}</p>
+        <p><b>Instructor: </b>{instructor.name}</p>
+        <p><b>Count of students: </b>{project.studentCount}</p>
+        <p><b>Generators: </b>{filteredGenerators.map((generator) => generator.name).join(", ")}</p>
+        <br />
+
+        <h5>Rounds:</h5>
+        {filteredRounds.length > 0 ? (
+          filteredRounds.map((round, index) => (
+            <div key={round.id}>
+              <p
+                key={round.id}
+                onClick={() => navigate(`/round/${round.id}`, { state: { project, filteredGenerators, round, index } })}
+                style={{ cursor: "pointer", color: "darkred" }}
+              >
+                Round {index + 1}
+              </p>
+              {/* Stĺpcový graf pre každé kolo */}
+              < div style={{ height: "400px" }}>
+                <Bar data={prepareChartData(round.id)} />
+              </div>
+            </div>
+
+          ))
+        ) : (
+          <p>No rounds available for this project.</p>
+        )}
+      </div >
+
       <ProjectModal
         setIsNewModalShown={setIsModalShown}
         isNewModalShown={isModalShown}
@@ -60,8 +105,9 @@ const ProjectDetail = ({ project, createdByUser }) => {
         isShown={isDeleteModalShown}
         setIsShown={setIsDeleteModalShown}
       />
-    </div>
+    </div >
   );
 };
+
 
 export default ProjectDetail;

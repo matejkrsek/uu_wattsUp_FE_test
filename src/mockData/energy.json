@@ -8,13 +8,51 @@
     {
         "id": "y",
         "generatorId": "b",
-        "roundId": "123_2",
+        "roundId": "123_1",
         "totalEnergy": 235
     },
     {
         "id": "z",
         "generatorId": "c",
-        "roundId": "123_3",
+        "roundId": "123_1",
         "totalEnergy": 421
+    },
+
+    {
+        "id": "xx",
+        "generatorId": "a",
+        "roundId": "123_2",
+        "totalEnergy": 35
+    },
+    {
+        "id": "yy",
+        "generatorId": "b",
+        "roundId": "123_2",
+        "totalEnergy": 81
+    },
+    {
+        "id": "zz",
+        "generatorId": "c",
+        "roundId": "123_2",
+        "totalEnergy": 44
+    },
+
+    {
+        "id": "xxx",
+        "generatorId": "a",
+        "roundId": "123_3",
+        "totalEnergy": 300
+    },
+    {
+        "id": "yyy",
+        "generatorId": "b",
+        "roundId": "123_3",
+        "totalEnergy": 320
+    },
+    {
+        "id": "zzz",
+        "generatorId": "c",
+        "roundId": "123_3",
+        "totalEnergy": 280
     }
 ]
