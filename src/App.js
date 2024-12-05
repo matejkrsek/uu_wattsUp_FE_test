@@ -6,11 +6,10 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Icon from "@mdi/react";
-import { mdiCogOutline, mdiHomeCircle, mdiHoopHouse, mdiLogout } from "@mdi/js";
+import { mdiCogOutline, mdiLogout } from "@mdi/js";
 
 function App() {
   const navigate = useNavigate();
@@ -46,13 +45,6 @@ function App() {
                 <span className="me-3"></span>
                 {!hideIcons && ( // Skryte ikonky ak je na specific route
                   <>
-                    <Icon
-                      path={mdiHomeCircle}
-                      size={1.2}
-                      color="white"
-                      onClick={() => navigate("/overview")}
-                      style={{ cursor: "pointer" }}
-                    />
                     <Icon
                       path={mdiCogOutline}
                       size={1.2}
