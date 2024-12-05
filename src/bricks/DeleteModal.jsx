@@ -7,11 +7,10 @@ import { useNavigate } from "react-router";
 
 const DeleteModal = ({ project, isShown, setIsShown }) => {
   const navigate = useNavigate();
-  // Component state and logic here
-
   const [isErrorToastShown, setIsErrorToastShown] = useState(false);
   const [isSuccessToastShown, setIsSuccessToastShown] = useState(false);
-  const { deleteProject, fetchProject, status } = useProject();
+  const [countdown, setCountdown] = useState(5);
+  const { deleteProject } = useProject();
 
   const handleClose = () => {
     setIsShown(false);
@@ -21,16 +20,21 @@ const DeleteModal = ({ project, isShown, setIsShown }) => {
     try {
       await deleteProject(project);
       console.log("Success from FE");
-      setIsShown(false);
       setIsSuccessToastShown(true);
-      // delay
-      setTimeout(() => {
-        navigate("/overview");
-      }, 3000);
+
+      // Start countdown
+      const countdownInterval = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev === 1) {
+            clearInterval(countdownInterval);
+            navigate("/overview");
+          }
+          return prev - 1;
+        });
+      }, 1000);
     } catch (error) {
       setIsErrorToastShown(true);
-
-      console.log("error on FE:" + error);
+      console.log("Error on FE:", error);
     } finally {
       setIsShown(false);
     }
@@ -71,10 +75,9 @@ const DeleteModal = ({ project, isShown, setIsShown }) => {
         onClose={() => setIsErrorToastShown(false)}
       >
         <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-          <strong className="me-auto">ERROOR</strong>
+          <strong className="me-auto">Error</strong>
         </Toast.Header>
-        <Toast.Body>Error!!!!</Toast.Body>
+        <Toast.Body>Error occurred while deleting the project!</Toast.Body>
       </Toast>
 
       <Toast
@@ -90,10 +93,12 @@ const DeleteModal = ({ project, isShown, setIsShown }) => {
         onClose={() => setIsSuccessToastShown(false)}
       >
         <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-          <strong className="me-auto">Succesfully deleted!</strong>
+          <strong className="me-auto">Successfully deleted!</strong>
         </Toast.Header>
-        <Toast.Body>Succesfully deleted!!!!!</Toast.Body>
+        <Toast.Body>
+          Successfully deleted! You are being redirected to the home page in:{" "}
+          {countdown} seconds.
+        </Toast.Body>
       </Toast>
     </div>
   );
