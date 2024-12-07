@@ -31,12 +31,17 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
   const { projectId } = useParams();
   const [isModalShown, setIsModalShown] = useState(false);
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
+  const [currentProject, setCurrentProject] = useState(project);
+
+  const handleProjectUpdate = (updatedProject) => {
+    setCurrentProject(updatedProject);
+  };
 
   const filteredRounds = rounds.filter(
     (round) => round.projectId === project.id
   );
   const filteredGenerators = generators.filter((generator) =>
-    project.generatorList.includes(generator.id)
+    currentProject.generatorList.includes(generator.id)
   );
 
   // Funkcia na filtrovanie energie podľa kôl
@@ -81,8 +86,8 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
       >
         <div></div>
         <div>
-          <h1>{project.name}</h1>
-          <h4>{project.date}</h4>
+          <h1>{currentProject.name}</h1>
+          <h4>{currentProject.date}</h4>
         </div>
         <div
           style={{
@@ -120,7 +125,7 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
       <div style={{ textAlign: "left" }}>
         <p>
           <b>Organization: </b>
-          {project.organization}
+          {currentProject.organization}
         </p>
         <p>
           <b>Instructor: </b>
@@ -128,7 +133,7 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
         </p>
         <p>
           <b>Count of students: </b>
-          {project.studentCount}
+          {currentProject.studentCount}
         </p>
         <p>
           <b>Generators: </b>
@@ -165,12 +170,13 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
       <ProjectModal
         setIsNewModalShown={setIsModalShown}
         isNewModalShown={isModalShown}
-        incomingFormData={project}
+        incomingFormData={currentProject}
         incomingVersion="edit"
+        onUpdate={handleProjectUpdate}
       />
 
       <DeleteModal
-        project={project}
+        project={currentProject}
         isShown={isDeleteModalShown}
         setIsShown={setIsDeleteModalShown}
       />

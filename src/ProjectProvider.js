@@ -31,6 +31,7 @@ export function ProjectProvider({ children }) {
   const handleCreateProject = async (newProject, callback) => {
     try {
       await createProject(newProject);
+      console.log("proběhl Create v handleCreateProject");
       callback && callback();
       fetchProject();
     } catch (error) {

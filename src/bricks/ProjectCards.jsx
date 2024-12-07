@@ -10,19 +10,26 @@ const ProjectCards = ({ projects, users, generators }) => {
         padding: "7px",
       }}
     >
-      {projects?.map((project) => (
-        <Tile key={project.id} project={project} users={users} generators={generators} />
-      ))}
+      {projects?.map((project) => {
+        return (
+          <Tile
+            key={project.id}
+            project={project}
+            users={users}
+            generators={generators}
+          />
+        );
+      })}
 
       <style>
         {`
-          @media (max-width: 570px) {
-            .d-flex {
-              justify-content: center;
-              align-items: center;
-            }
+        @media (max-width: 570px) {
+          .d-flex {
+            justify-content: center;
+            align-items: center;
           }
-        `}
+        }
+      `}
       </style>
     </div>
   );

@@ -36,7 +36,6 @@ const CreateProject = () => {
       <ProjectModal
         isNewModalShown={isNewModalShown}
         setIsNewModalShown={setIsNewModalShown}
-        incomingFormData={formData}
         incomingVersion="create"
       />
     </div>
