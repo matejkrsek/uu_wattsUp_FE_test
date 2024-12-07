@@ -9,6 +9,7 @@ const ProjectModal = ({
   setIsNewModalShown,
   incomingVersion,
   onUpdate,
+  setIsProjectCreatedToastShown,
 }) => {
   const [formData, setFormData] = useState(
     incomingFormData || {
@@ -48,19 +49,14 @@ const ProjectModal = ({
 
   const handleCreate = () => {
     if (formData.id !== "") {
-      // Edit existing project
       updateProject(formData);
       onUpdate(formData);
     } else {
-      // Create a new project
-
       createProject(formData);
+      setIsProjectCreatedToastShown(true); // Update toast visibility state
     }
 
-    // Close the modal after saving
-    setIsNewModalShown(false);
-
-    // Optionally: Add a success message or toast here
+    setIsNewModalShown(false); // Close modal after saving
   };
 
   return (
