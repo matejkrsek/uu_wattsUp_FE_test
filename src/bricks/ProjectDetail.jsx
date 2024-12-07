@@ -14,6 +14,8 @@ import { Bar } from "react-chartjs-2";
 
 import ProjectModal from "./OverviewInterface/ProjectModal";
 import DeleteModal from "./DeleteModal";
+import { mdiDelete, mdiKeyboardBackspace, mdiPencil } from "@mdi/js";
+import Icon from "@mdi/react";
 
 ChartJS.register(
   CategoryScale,
@@ -70,27 +72,50 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
 
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
-      <div style={{ display: "flex", gap: "10px", justifyContent: "right" }}>
-        <Button size="sm" onClick={() => setIsModalShown(true)}>
-          Edit
-        </Button>
-        <Button size="sm" onClick={() => setIsDeleteModalShown(true)}>
-          Delete
-        </Button>
-        <Button
-          size="sm"
-          variant="outline-secondary"
-          onClick={() => navigate("/overview")}
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          justifyContent: "space-between",
+        }}
+      >
+        <div></div>
+        <div>
+          <h1>{project.name}</h1>
+          <h4>{project.date}</h4>
+        </div>
+        <div
+          style={{
+            height: "35px",
+            display: "flex",
+            marginLeft: "50px",
+            gap: "5px",
+          }}
         >
-          Back
-        </Button>
+          <Button
+            variant="outline-info"
+            size="sm"
+            onClick={() => setIsModalShown(true)}
+          >
+            <Icon path={mdiPencil} size={1} />
+          </Button>
+          <Button
+            size="sm"
+            variant="outline-danger"
+            onClick={() => setIsDeleteModalShown(true)}
+          >
+            <Icon path={mdiDelete} size={1} />
+          </Button>
+          <Button
+            size="sm"
+            variant="outline-secondary"
+            onClick={() => navigate("/overview")}
+          >
+            <Icon path={mdiKeyboardBackspace} size={1} />
+          </Button>
+        </div>
       </div>
       <br />
-
-      <div>
-        <h1>{project.name}</h1>
-        <h4>{project.date}</h4>
-      </div>
 
       <div style={{ textAlign: "left" }}>
         <p>

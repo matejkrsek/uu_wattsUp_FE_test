@@ -9,12 +9,11 @@ const ProjectModal = ({
   setIsNewModalShown,
   incomingVersion,
 }) => {
-
   const [formData, setFormData] = useState(
     incomingFormData || {
       id: "",
       name: "",
-      date: "2032-41-5", // FIX ME
+      date: new Date("2032-05-06"), // FIX ME
       organization: "",
       description: "",
       createdBy: "",
@@ -52,6 +51,7 @@ const ProjectModal = ({
       updateProject(formData);
     } else {
       // Create a new project
+      console.log("sending CreateProjecr call");
       createProject(formData);
     }
 

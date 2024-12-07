@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import Icon from '@mdi/react';
-import { mdiPlus } from '@mdi/js';
+import Icon from "@mdi/react";
+import { mdiPlus } from "@mdi/js";
 
 import ProjectModal from "./ProjectModal";
 
 const CreateProject = () => {
   const [isNewModalShown, setIsNewModalShown] = useState(false);
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
-    date: "", // eventDate
+    date: "", // eventDate,
+    creationDate: "",
     organization: "",
     description: "",
     createdBy: "",
-    student: "",
+    instructor: "",
     roundCount: "",
     roundDuration: "",
     studentCount: null,
     generatorList: [], // Array to store selected generator IDs
+    status: "true",
   });
 
   return (
