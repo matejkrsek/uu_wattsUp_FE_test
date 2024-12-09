@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Button } from "react-bootstrap";
+import { Button, Toast } from "react-bootstrap";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -31,6 +31,7 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
   const { projectId } = useParams();
   const [isModalShown, setIsModalShown] = useState(false);
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
+  const [isUpdatedToastShown, setIsUpdatedToastShown] = useState(false);
   const [currentProject, setCurrentProject] = useState(project);
 
   const handleProjectUpdate = (updatedProject) => {
@@ -168,11 +169,12 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
       </div>
 
       <ProjectModal
-        setIsNewModalShown={setIsModalShown}
-        isNewModalShown={isModalShown}
+        setIsModalShown={setIsModalShown}
+        isModalShown={isModalShown}
         incomingFormData={currentProject}
-        incomingVersion="edit"
+        version="edit"
         onUpdate={handleProjectUpdate}
+        setIsUpdatedToastShown={setIsUpdatedToastShown}
       />
 
       <DeleteModal
@@ -180,6 +182,27 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
         isShown={isDeleteModalShown}
         setIsShown={setIsDeleteModalShown}
       />
+
+      <Toast
+        style={{
+          position: "fixed",
+          top: "10px", // Nastaví horní odsazení
+          right: "10px", // Nastaví pravé odsazení
+          zIndex: 1050,
+        }}
+        bg="success"
+        show={isUpdatedToastShown}
+        onClose={() => setIsUpdatedToastShown(false)}
+        delay={3000}
+        autohide
+      >
+        <Toast.Header>
+          <strong className="me-auto">Edited!</strong>
+        </Toast.Header>
+        <Toast.Body>
+          <strong>The project was successfully edited</strong>
+        </Toast.Body>
+      </Toast>
     </div>
   );
 };

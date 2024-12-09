@@ -6,9 +6,8 @@ import { mdiPlus } from "@mdi/js";
 import ProjectModal from "./ProjectModal";
 
 const CreateProject = () => {
-  const [isNewModalShown, setIsNewModalShown] = useState(false);
-  const [isProjectedCreatedToastShown, setIsProjectCreatedToastShown] =
-    useState(false);
+  const [isModalShown, setIsModalShown] = useState(false);
+  const [isCreatedToastShown, setIsCreatedToastShown] = useState(false);
   const [formData, setFormData] = useState({
     id: "",
     name: "",
@@ -30,34 +29,35 @@ const CreateProject = () => {
       <Button
         variant="success"
         className="w-full md:w-auto"
-        onClick={() => setIsNewModalShown(true)}
+        onClick={() => setIsModalShown(true)}
       >
         <Icon path={mdiPlus} size={1} />
       </Button>
 
       <ProjectModal
-        isNewModalShown={isNewModalShown}
-        setIsNewModalShown={setIsNewModalShown}
-        incomingVersion="create"
-        setIsProjectCreatedToastShown={setIsProjectCreatedToastShown}
+        isModalShown={isModalShown}
+        setIsModalShown={setIsModalShown}
+        version="create"
+        setIsCreatedToastShown={setIsCreatedToastShown}
       />
 
       <Toast
         style={{
           position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
+          top: "10px", // Nastaví horní odsazení
+          right: "10px", // Nastaví pravé odsazení
           zIndex: 1050,
         }}
         bg="success"
-        show={isProjectedCreatedToastShown}
-        onClose={() => setIsProjectCreatedToastShown(false)}
+        show={isCreatedToastShown}
+        onClose={() => setIsCreatedToastShown(false)}
+        delay={3000}
+        autohide
       >
         <Toast.Header>
           <strong className="me-auto">Created!</strong>
         </Toast.Header>
-        <Toast.Body>The new proeject was successfully created</Toast.Body>
+        <Toast.Body>The new project was successfully created</Toast.Body>
       </Toast>
     </div>
   );

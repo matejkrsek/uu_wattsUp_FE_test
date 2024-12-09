@@ -75,7 +75,9 @@ const DeleteModal = ({ project, isShown, setIsShown }) => {
         <Toast.Header>
           <strong className="me-auto">Error</strong>
         </Toast.Header>
-        <Toast.Body>Error occurred while deleting the project!</Toast.Body>
+        <Toast.Body>
+          <strong>Error occurred while deleting the project!</strong>
+        </Toast.Body>
       </Toast>
 
       <Toast
@@ -94,8 +96,10 @@ const DeleteModal = ({ project, isShown, setIsShown }) => {
           <strong className="me-auto">Successfully deleted!</strong>
         </Toast.Header>
         <Toast.Body>
-          Successfully deleted! You are being redirected to the home page in:{" "}
-          {countdown} seconds.
+          <strong>
+            Successfully deleted! You are being redirected to the home page in:{" "}
+            {countdown} seconds.
+          </strong>
         </Toast.Body>
       </Toast>
     </div>

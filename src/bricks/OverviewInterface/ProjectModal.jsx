@@ -5,11 +5,12 @@ import { useForm } from "react-hook-form";
 
 const ProjectModal = ({
   incomingFormData,
-  isNewModalShown,
-  setIsNewModalShown,
-  incomingVersion,
+  isModalShown,
+  setIsModalShown,
+  version,
   onUpdate,
-  setIsProjectCreatedToastShown,
+  setIsCreatedToastShown,
+  setIsUpdatedToastShown,
 }) => {
   const [formData, setFormData] = useState(
     incomingFormData || {
@@ -51,12 +52,13 @@ const ProjectModal = ({
     if (formData.id !== "") {
       updateProject(formData);
       onUpdate(formData);
+      setIsUpdatedToastShown(true);
     } else {
       createProject(formData);
-      setIsProjectCreatedToastShown(true); // Update toast visibility state
+      setIsCreatedToastShown(true); // Update toast visibility state
     }
 
-    setIsNewModalShown(false); // Close modal after saving
+    setIsModalShown(false); // Close modal after saving
   };
 
   return (
@@ -64,13 +66,13 @@ const ProjectModal = ({
       {" "}
       <Modal
         size="lg"
-        show={isNewModalShown}
-        onHide={() => setIsNewModalShown(false)}
+        show={isModalShown}
+        onHide={() => setIsModalShown(false)}
       >
         <Form onSubmit={handleSubmit(handleCreate)}>
           <Modal.Header closeButton>
             <Modal.Title>
-              {incomingVersion === "create" ? "Create" : "Edit"} project
+              {version === "create" ? "Create" : "Edit"} project
             </Modal.Title>
           </Modal.Header>
 
