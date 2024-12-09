@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Button } from "react-bootstrap";
 import DeleteModal from "./DeleteModal";
+import ReactSpeedometer from "react-d3-speedometer";
 
 const RoundDetail = ({ round, project, users, generators, index }) => {
   const navigate = useNavigate();
@@ -14,7 +15,15 @@ const RoundDetail = ({ round, project, users, generators, index }) => {
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
       <div style={{ display: "flex", gap: "10px", justifyContent: "right" }}>
-        <Button size="sm" variant="outline-secondary" onClick={() => navigate(`/project/${project.id}`, { state: { project, instructor } })}>
+        <Button
+          size="sm"
+          variant="outline-secondary"
+          onClick={() =>
+            navigate(`/project/${project.id}`, {
+              state: { project, instructor },
+            })
+          }
+        >
           Back
         </Button>
       </div>
@@ -24,9 +33,17 @@ const RoundDetail = ({ round, project, users, generators, index }) => {
       <h5>{project.name}</h5>
       <h6>{project.date}</h6>
 
+      <ReactSpeedometer
+        maxValue={200}
+        value={120}
+        needleColor="red"
+        startColor="green"
+        segments={10}
+        endColor="blue"
+        currentValueText="Current value: ${value}"
+      />
 
       <br />
-
     </div>
   );
 };

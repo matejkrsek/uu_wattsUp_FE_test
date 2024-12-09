@@ -8,21 +8,6 @@ import ProjectModal from "./ProjectModal";
 const CreateProject = () => {
   const [isModalShown, setIsModalShown] = useState(false);
   const [isCreatedToastShown, setIsCreatedToastShown] = useState(false);
-  const [formData, setFormData] = useState({
-    id: "",
-    name: "",
-    date: "", // eventDate,
-    creationDate: "",
-    organization: "",
-    description: "",
-    createdBy: "",
-    instructor: "",
-    roundCount: "",
-    roundDuration: "",
-    studentCount: null,
-    generatorList: [], // Array to store selected generator IDs
-    status: "true",
-  });
 
   return (
     <div className="w-full md:w-auto">

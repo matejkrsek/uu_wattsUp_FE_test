@@ -4,7 +4,6 @@ import generators from "./mockData/generators";
 import rounds from "./mockData/rounds";
 import gateways from "./mockData/gateways";
 
-
 const USE_MOCK_DATA = true;
 
 // Všeobecná funkcia na API volania
@@ -68,7 +67,6 @@ function mockCall(url, dtoIn) {
     case "/mockedListProjects":
       return Promise.resolve([...projects]); // Vrátenie kópie zoznamu projektov
 
-
     case "/mockedListUsers":
       return Promise.resolve([...users]);
 
@@ -86,8 +84,6 @@ function mockCall(url, dtoIn) {
   }
 }
 
-
-
 export async function login(dtoIn) {
   return await call("POST", "/login", dtoIn);
 }
@@ -95,25 +91,39 @@ export async function login(dtoIn) {
 // API funkcie
 // P R O J E C T S
 export async function loadProjects() {
-  const url = USE_MOCK_DATA ? "/mockedListProjects" : "http://127.0.0.1:8000/project/list";
+  const url = USE_MOCK_DATA
+    ? "/mockedListProjects"
+    : "http://127.0.0.1:8000/project/list";
   return USE_MOCK_DATA ? mockCall(url) : call("GET", url);
 }
 
 export async function createProject(dtoIn) {
-  const url = USE_MOCK_DATA ? "/mockedCreateProject" : "http://127.0.0.1:8000/project/create";
+  const url = USE_MOCK_DATA
+    ? "/mockedCreateProject"
+    : "http://127.0.0.1:8000/project/create";
   return USE_MOCK_DATA ? mockCall(url, dtoIn) : call("POST", url, dtoIn);
 }
 
 export async function updateProject(dtoIn) {
-  const url = USE_MOCK_DATA ? "/mockedUpdateProject" : "http://127.0.0.1:8000/project/update";
+  const url = USE_MOCK_DATA
+    ? "/mockedUpdateProject"
+    : "http://127.0.0.1:8000/project/update";
   return USE_MOCK_DATA ? mockCall(url, dtoIn) : call("POST", url, dtoIn);
 }
 
 export async function deleteProject(dtoIn) {
-  const url = USE_MOCK_DATA ? "/mockedDeleteProject" : "http://127.0.0.1:8000/project/delete";
+  const url = USE_MOCK_DATA
+    ? "/mockedDeleteProject"
+    : "http://127.0.0.1:8000/project/delete";
   return USE_MOCK_DATA ? mockCall(url, dtoIn) : call("POST", url, dtoIn);
 }
 
+export async function loadProject(projectId) {
+  const url = USE_MOCK_DATA
+    ? `/mockedGetProject/${projectId}`
+    : `http://127.0.0.1:8000/project/${projectId}`;
+  return USE_MOCK_DATA ? mockCall(url, { id: projectId }) : call("GET", url);
+}
 /* // O S T A T N E
 export async function loadUsers() {
   const url = USE_MOCK_DATA ? "/mockedListUsers" : "http://127.0.0.1:8000/users/list";

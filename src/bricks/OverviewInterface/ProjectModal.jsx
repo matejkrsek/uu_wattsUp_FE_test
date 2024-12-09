@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useProject } from "../../ProjectProvider";
 import { useForm } from "react-hook-form";
@@ -12,22 +12,18 @@ const ProjectModal = ({
   setIsCreatedToastShown,
   setIsUpdatedToastShown,
 }) => {
-  const [formData, setFormData] = useState(
-    incomingFormData || {
-      id: "",
-      name: "",
-      date: "2024-05-06", // FIX ME
-      organization: "",
-      description: "",
-      createdBy: "",
-      student: "",
-      rounds: "",
-      generatorList: [], // Array to store selected generator IDs
-      status: true,
-    }
-  ); //
-
-  const { register, handleSubmit } = useForm();
+  const emptyForm = {
+    id: "",
+    name: "",
+    date: new Date().toISOString().slice(0, 10), // FIX ME
+    organization: "",
+    description: "",
+    createdBy: "",
+    student: "",
+    rounds: "",
+    generatorList: [], // Array to store selected generator IDs
+    status: true,
+  };
 
   const generatorList = [
     { id: "a", name: "Hydroelectric Generator" },
@@ -35,6 +31,10 @@ const ProjectModal = ({
     { id: "c", name: "Solar Photovoltaic Generator" },
     { id: "d", name: "Universal" },
   ];
+
+  const [formData, setFormData] = useState(incomingFormData || emptyForm); //
+  const { register, handleSubmit } = useForm();
+  const { createProject, updateProject } = useProject(); // add edit
 
   const toggleGenerator = (generatorId) => {
     setFormData((prev) => {
@@ -46,20 +46,25 @@ const ProjectModal = ({
     });
   };
 
-  const { createProject, updateProject } = useProject(); // add edit
-
-  const handleCreate = () => {
+  const handleSubmitForm = () => {
     if (formData.id !== "") {
+      //Update
       updateProject(formData);
       onUpdate(formData);
       setIsUpdatedToastShown(true);
     } else {
+      //Create
       createProject(formData);
-      setIsCreatedToastShown(true); // Update toast visibility state
+      setIsCreatedToastShown(true);
     }
 
-    setIsModalShown(false); // Close modal after saving
+    setIsModalShown(false); // Close modal
   };
+
+  // resetuje formulář na prázné hodnoty při create...
+  useEffect(() => {
+    if (!formData.id) setFormData(emptyForm);
+  }, [isModalShown]);
 
   return (
     <div>
@@ -69,7 +74,7 @@ const ProjectModal = ({
         show={isModalShown}
         onHide={() => setIsModalShown(false)}
       >
-        <Form onSubmit={handleSubmit(handleCreate)}>
+        <Form onSubmit={handleSubmit(handleSubmitForm)}>
           <Modal.Header closeButton>
             <Modal.Title>
               {version === "create" ? "Create" : "Edit"} project
