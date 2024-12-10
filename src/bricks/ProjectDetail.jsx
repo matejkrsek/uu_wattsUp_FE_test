@@ -140,9 +140,9 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
           <b>Generators: </b>
           {filteredGenerators.map((generator) => generator.name).join(", ")}
         </p>
-        <br />
 
         <h5>Rounds:</h5>
+        <br />
         {filteredRounds.length > 0 ? (
           filteredRounds.map((round, index) => (
             <div key={round.id}>
@@ -153,7 +153,7 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
                     state: { project, filteredGenerators, round, index },
                   })
                 }
-                style={{ cursor: "pointer", color: "darkred" }}
+                style={{ cursor: "pointer" }}
               >
                 Round {index + 1}
               </p>
