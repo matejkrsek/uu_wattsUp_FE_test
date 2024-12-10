@@ -9,7 +9,6 @@ const CreateProject = () => {
   const [isModalShown, setIsModalShown] = useState(false);
   const [isCreatedToastShown, setIsCreatedToastShown] = useState(false);
   const [formData, setFormData] = useState({
-    id: "",
     name: "",
     date: "", // eventDate,
     creationDate: "",
@@ -18,7 +17,7 @@ const CreateProject = () => {
     createdBy: "",
     instructor: "",
     roundCount: "",
-    roundDuration: "",
+    roundDuration: 10,
     studentCount: null,
     generatorList: [], // Array to store selected generator IDs
     status: "true",
