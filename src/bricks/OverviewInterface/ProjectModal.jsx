@@ -14,29 +14,21 @@ const ProjectModal = ({
   setIsUpdatedToastShown,
 }) => {
   const { generators, users } = useData();
-  const [formData, setFormData] = useState(
-    incomingFormData || {
-      id: "",
-      name: "",
-      date: "2024-05-06", // FIX ME
-      organization: "",
-      description: "",
-      createdBy: "",
-      student: "",
-      rounds: "",
-      generatorList: [], // Array to store selected generator IDs
-      status: true,
-    }
-  ); //
-
-  const { register, handleSubmit } = useForm();
-
-  const generatorList = [
-    { id: "a", name: "Hydroelectric Generator" },
-    { id: "b", name: "Wind Turbine Generator" },
-    { id: "c", name: "Solar Photovoltaic Generator" },
-    { id: "d", name: "Universal" },
-  ];
+  const emptyForm = {
+    id: "",
+    name: "",
+    date: new Date().toISOString().substring(0, 10), // FIX ME
+    organization: "",
+    description: "",
+    createdBy: "",
+    student: "",
+    rounds: "",
+    roundDuration: "",
+    instructor: "",
+    studentCount: "",
+    generatorList: [], // Array to store selected generator IDs
+    status: true,
+  }; //
 
   const [formData, setFormData] = useState(incomingFormData || emptyForm); //
   const { register, handleSubmit } = useForm();
@@ -172,10 +164,78 @@ const ProjectModal = ({
               </Col>
             </Form.Group>
 
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Duration of Rounds
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  {...register("roundDuration")}
+                  //  required
+                  type="number"
+                  placeholder="Duration of one round (minutes)"
+                  value={formData.roundDuration}
+                  min={1}
+                  max={20}
+                  onChange={(e) =>
+                    setFormData({ ...formData, roundDuration: e.target.value })
+                  }
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Number of students
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  {...register("studentCount")}
+                  //  required
+                  type="number"
+                  placeholder="Number of students in the class"
+                  value={formData.studentCount}
+                  min={1}
+                  max={20}
+                  onChange={(e) =>
+                    setFormData({ ...formData, studentCount: e.target.value })
+                  }
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Instructor
+              </Form.Label>
+              <Col sm="10">
+                <Form.Select
+                  {...register("instructor")}
+                  required
+                  value={formData.instructor}
+                  onChange={(e) =>
+                    setFormData({ ...formData, instructor: e.target.value })
+                  }
+                >
+                  <option value="">Select Instructor</option>
+                  {users
+                    .filter(
+                      (user) =>
+                        user.role === "instructor" || user.role === "admin"
+                    )
+                    .map((user) => (
+                      <option key={user.id} value={user.name}>
+                        {user.name}
+                      </option>
+                    ))}
+                </Form.Select>
+              </Col>
+            </Form.Group>
+
             {/* Generators with Checkboxes */}
             <Form.Group className="mb-3">
               <Form.Label>Generators</Form.Label>
-              {generatorList.map((generator) => (
+              {generators.map((generator) => (
                 <Form.Check
                   // {...register("rounds")}
                   // required

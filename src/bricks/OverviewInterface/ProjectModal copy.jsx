@@ -193,14 +193,21 @@ const ProjectModal = ({
                   {...register("instructor")}
                   required
                   value={formData.instructor}
-                  onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, instructor: e.target.value })
+                  }
                 >
                   <option value="">Select Instructor</option>
-                  {users.filter(user => user.role === 'instructor' || user.role === 'admin').map(user => (
-                    <option key={user.id} value={user.name}>
-                      {user.name}
-                    </option>
-                  ))}
+                  {users
+                    .filter(
+                      (user) =>
+                        user.role === "instructor" || user.role === "admin"
+                    )
+                    .map((user) => (
+                      <option key={user.id} value={user.name}>
+                        {user.name}
+                      </option>
+                    ))}
                 </Form.Select>
               </Col>
             </Form.Group>
