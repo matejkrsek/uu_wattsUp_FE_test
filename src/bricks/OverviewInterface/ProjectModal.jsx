@@ -151,7 +151,7 @@ const ProjectModal = ({
               <Col sm="10">
                 <Form.Control
                   {...register("rounds")}
-                  //  required
+                  required
                   type="number"
                   placeholder="Number of power production rounds"
                   value={formData.rounds}
@@ -171,7 +171,7 @@ const ProjectModal = ({
               <Col sm="10">
                 <Form.Control
                   {...register("roundDuration")}
-                  //  required
+                  required
                   type="number"
                   placeholder="Duration of one round (minutes)"
                   value={formData.roundDuration}
