@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
-import { useData } from "../../DataProvider";
 import { useProject } from "../../ProjectProvider";
+import { useData } from "../../DataProvider";
 import { useForm } from "react-hook-form";
 
 const ProjectModal = ({
@@ -18,59 +18,49 @@ const ProjectModal = ({
     incomingFormData || {
       id: "",
       name: "",
-      date: "2024-05-06", // FIX ME
+      date: "", // eventDate,
+      creationDate: "",
       organization: "",
       description: "",
       createdBy: "",
-      student: "",
-      rounds: "",
-      generatorList: [], // Array to store selected generator IDs
-      status: true,
+      instructor: "",
+      roundCount: "",
+      roundDuration: 10,
+      studentCount: null,
+      generators: [], // Array to store selected generator IDs
+      status: "true",
     }
-  ); //
+  );
 
   const { register, handleSubmit } = useForm();
-
-  const generatorList = [
-    { id: "a", name: "Hydroelectric Generator" },
-    { id: "b", name: "Wind Turbine Generator" },
-    { id: "c", name: "Solar Photovoltaic Generator" },
-    { id: "d", name: "Universal" },
-  ];
-
-  const [formData, setFormData] = useState(incomingFormData || emptyForm); //
-  const { register, handleSubmit } = useForm();
-  const { createProject, updateProject } = useProject(); // add edit
 
   const toggleGenerator = (generatorId) => {
     setFormData((prev) => {
-      const isSelected = prev.generatorList.includes(generatorId);
+      const isSelected = prev.generators.includes(generatorId);
       const updatedGenerators = isSelected
-        ? prev.generatorList.filter((id) => id !== generatorId) // Remove if already selected
-        : [...prev.generatorList, generatorId]; // Add if not selected
-      return { ...prev, generatorList: updatedGenerators };
+        ? prev.generators.filter((id) => id !== generatorId) // Remove if already selected
+        : [...prev.generators, generatorId]; // Add if not selected
+      return { ...prev, generators: updatedGenerators };
     });
   };
 
-  const handleSubmitForm = () => {
+  const { createProject, updateProject } = useProject(); // add edit
+
+  const handleCreate = () => {
     if (formData.id !== "") {
-      //Update
       updateProject(formData);
       onUpdate(formData);
       setIsUpdatedToastShown(true);
     } else {
-      //Create
       createProject(formData);
-      setIsCreatedToastShown(true);
+      setIsCreatedToastShown(true); // Update toast visibility state
     }
 
-    setIsModalShown(false); // Close modal
+    setIsModalShown(false); // Close modal after saving
   };
 
-  // resetuje formulář na prázné hodnoty při create...
-  useEffect(() => {
-    if (!formData.id) setFormData(emptyForm);
-  }, [isModalShown]);
+  console.log("formdata", formData.generators);
+  console.log("incomingformdata", formData.incomingFormData.generators);
 
   return (
     <div>
@@ -80,7 +70,7 @@ const ProjectModal = ({
         show={isModalShown}
         onHide={() => setIsModalShown(false)}
       >
-        <Form onSubmit={handleSubmit(handleSubmitForm)}>
+        <Form onSubmit={handleSubmit(handleCreate)}>
           <Modal.Header closeButton>
             <Modal.Title>
               {version === "create" ? "Create" : "Edit"} project
@@ -158,31 +148,74 @@ const ProjectModal = ({
               </Form.Label>
               <Col sm="10">
                 <Form.Control
-                  {...register("rounds")}
+                  {...register("roundCount")}
                   //  required
                   type="number"
                   placeholder="Number of power production rounds"
-                  value={formData.rounds}
+                  value={formData.roundCount}
                   min={1}
                   max={10}
                   onChange={(e) =>
-                    setFormData({ ...formData, rounds: e.target.value })
+                    setFormData({ ...formData, roundCount: e.target.value })
                   }
                 />
+              </Col>
+            </Form.Group>
+
+            {/* Rounds Duration */}
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Duration of Rounds
+              </Form.Label>
+              <Col sm="10">
+                <Form.Control
+                  {...register("roundDuration")}
+                  //  required
+                  type="number"
+                  placeholder="Duration of one round (minutes)"
+                  value={formData.roundDuration}
+                  min={1}
+                  max={20}
+                  onChange={(e) =>
+                    setFormData({ ...formData, roundDuration: e.target.value })
+                  }
+                />
+              </Col>
+            </Form.Group>
+
+            {/* instructor */}
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Instructor
+              </Form.Label>
+              <Col sm="10">
+                <Form.Select
+                  {...register("instructor")}
+                  required
+                  value={formData.instructor}
+                  onChange={(e) => setFormData({ ...formData, instructor: e.target.value })}
+                >
+                  <option value="">Select Instructor</option>
+                  {users.filter(user => user.role === 'instructor' || user.role === 'admin').map(user => (
+                    <option key={user.id} value={user.name}>
+                      {user.name}
+                    </option>
+                  ))}
+                </Form.Select>
               </Col>
             </Form.Group>
 
             {/* Generators with Checkboxes */}
             <Form.Group className="mb-3">
               <Form.Label>Generators</Form.Label>
-              {generatorList.map((generator) => (
+              {generators.map((generator) => (
                 <Form.Check
                   // {...register("rounds")}
                   // required
                   key={generator.id}
                   type="checkbox"
                   label={generator.name}
-                  checked={formData.generatorList.includes(generator.id)} // Check if the generator is selected
+                  checked={formData.generators.includes(generator.id)} // Check if the generator is selected
                   onChange={() => toggleGenerator(generator.id)} // Toggle selection
                 />
               ))}
