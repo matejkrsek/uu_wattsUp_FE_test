@@ -94,6 +94,13 @@ const RoundDetail = ({ round, project, users, generators, index }) => {
     return () => clearInterval(intervalRef.current); // Vyčistenie intervalu pri odmontovaní komponentu
   }, [roundId, generators]);
 
+  // jen pro účely vývoje loginu, takový test... pak smažeme
+  const handleTestLocalStorage = () => {
+    localStorage.setItem("userId", "asd654");
+    localStorage.setItem("role", "admin");
+    console.log("added to localStorage");
+  };
+
   return (
     <div style={{ maxWidth: "700px", margin: "0 auto", padding: "20px" }}>
       <div style={{ display: "flex", gap: "10px", justifyContent: "right" }}>
@@ -108,6 +115,9 @@ const RoundDetail = ({ round, project, users, generators, index }) => {
         >
           Back
         </Button>
+
+        {/*jen pro účely vývoje loginu, takový test... pak smažeme*/}
+        <Button onClick={handleTestLocalStorage}>Test Button</Button>
       </div>
       <br />
 

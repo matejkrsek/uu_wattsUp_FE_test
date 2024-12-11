@@ -15,6 +15,7 @@ async function call(method, url, dtoIn = null, opts = {}) {
         "Content-Type": "application/json",
       },
       body: dtoIn ? JSON.stringify(dtoIn) : null,
+      credentials: "include", // tento řádek zajistí, že VŠECHNY cally budou obsahovat cookie s accessTokenem
       ...opts,
     });
 
@@ -87,6 +88,16 @@ function mockCall(url, dtoIn) {
 export async function login(dtoIn) {
   return await call("POST", "/login", dtoIn);
 }
+// úspěšný login call vrací objekt
+// {
+//   "accessToken": "eyJhbGc...<jwt_token>",
+// "user":
+// {
+//    "id": "12345",
+//    "role": "user"
+// }
+//expiresIn: 3600,
+// }
 
 // API funkcie
 // P R O J E C T S

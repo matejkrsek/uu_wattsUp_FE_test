@@ -24,7 +24,14 @@ const LoginForm = () => {
 
     try {
       const response = await login(hashedData);
-      //  setToken(response.data.accessToken);
+
+      // zde nastavit ID a ROLE do localStorage
+      if (response.status.ok) {
+        localStorage.setItem("userId", response.userId);
+        localStorage.setItem("role", response.role);
+      } else {
+        console.log("Invalid response format");
+      }
     } catch (e) {
       console.log("Error" + e);
     }
@@ -67,7 +74,10 @@ const LoginForm = () => {
             }}
           />
         </Form.Group>
-        <Button variant="primary" type="submit"  onClick={() => navigate("/overview")}
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => navigate("/overview")}
         >
           Login
         </Button>

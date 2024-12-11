@@ -46,7 +46,7 @@ export function DataProvider({ children }) {
         generators,
         rounds,
         gateways,
-        status
+        status,
       }}
     >
       {children}
