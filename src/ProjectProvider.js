@@ -19,7 +19,10 @@ export function ProjectProvider({ children }) {
     setStatus({ state: "pending" });
     try {
       const data = await loadProjects();
-      setProjects(data);
+      console.log("we did it with Vadim");
+      console.log(data.projects);
+      setProjects(data.projects);
+
       setStatus({ state: "success" });
     } catch (error) {
       console.error("Error loading data:", error);

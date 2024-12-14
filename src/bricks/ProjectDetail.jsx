@@ -16,6 +16,7 @@ import ProjectModal from "./OverviewInterface/ProjectModal";
 import DeleteModal from "./DeleteModal";
 import { mdiDelete, mdiKeyboardBackspace, mdiPencil } from "@mdi/js";
 import Icon from "@mdi/react";
+import { useData } from "../DataProvider";
 
 ChartJS.register(
   CategoryScale,
@@ -26,13 +27,15 @@ ChartJS.register(
   Legend
 );
 
-const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
+const ProjectDetail = ({ project, generators, rounds, energy }) => {
   const navigate = useNavigate();
   const { projectId } = useParams();
   const [isModalShown, setIsModalShown] = useState(false);
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
   const [isUpdatedToastShown, setIsUpdatedToastShown] = useState(false);
   const [currentProject, setCurrentProject] = useState(project);
+
+  const { users } = useData();
 
   const handleProjectUpdate = (updatedProject) => {
     setCurrentProject(updatedProject);
@@ -130,7 +133,7 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy }) => {
         </p>
         <p>
           <b>Instructor: </b>
-          {instructor.name}
+          {currentProject.instructor.name}
         </p>
         <p>
           <b>Count of students: </b>

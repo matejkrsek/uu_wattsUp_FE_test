@@ -3,6 +3,7 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useData } from "../../DataProvider";
 import { useProject } from "../../ProjectProvider";
 import { useForm } from "react-hook-form";
+import DatePicker from "react-datepicker";
 
 const ProjectModal = ({
   incomingFormData,
@@ -24,7 +25,7 @@ const ProjectModal = ({
     student: "",
     rounds: "",
     roundDuration: "",
-    instructor: "",
+    instructor: { id: "", name: "" }, // id a name insructora
     studentCount: "",
     generatorList: [], // Array to store selected generator IDs
     status: true,
@@ -47,8 +48,8 @@ const ProjectModal = ({
   const handleSubmitForm = () => {
     if (formData.id !== "") {
       //Update
-      updateProject(formData);
-      onUpdate(formData);
+      updateProject(formData); // požadavek na server
+      onUpdate(formData); // vrací hodnoty na overview
       setIsUpdatedToastShown(true);
     } else {
       //Create
@@ -118,6 +119,22 @@ const ProjectModal = ({
                   onChange={(e) =>
                     setFormData({ ...formData, organization: e.target.value })
                   }
+                />
+              </Col>
+            </Form.Group>
+
+            {/* eventDate */}
+
+            <Form.Group as={Row} className="mb-3">
+              <Form.Label column sm="2">
+                Date
+              </Form.Label>
+              <Col sm="10">
+                <DatePicker
+                  selected={formData.date}
+                  onChange={(date) => setFormData({ ...formData, date })}
+                  dateFormat="dd/MM/yyyy"
+                  className="form-control"
                 />
               </Col>
             </Form.Group>
@@ -212,10 +229,16 @@ const ProjectModal = ({
                 <Form.Select
                   {...register("instructor")}
                   required
-                  value={formData.instructor}
-                  onChange={(e) =>
-                    setFormData({ ...formData, instructor: e.target.value })
-                  }
+                  value={formData.instructor.id} // Use only the id as the value
+                  onChange={(e) => {
+                    const selectedInstructor = users.find(
+                      (user) => user.id === e.target.value
+                    );
+                    setFormData({
+                      ...formData,
+                      instructor: selectedInstructor,
+                    });
+                  }}
                 >
                   <option value="">Select Instructor</option>
                   {users
@@ -224,7 +247,7 @@ const ProjectModal = ({
                         user.role === "instructor" || user.role === "admin"
                     )
                     .map((user) => (
-                      <option key={user.id} value={user.name}>
+                      <option key={user.id} value={user.id}>
                         {user.name}
                       </option>
                     ))}
