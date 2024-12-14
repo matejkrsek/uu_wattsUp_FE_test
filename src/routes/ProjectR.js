@@ -12,7 +12,7 @@ function ProjectR() {
   const params = useParams();
   const location = useLocation();
   const { fetchProject } = useProject();
-  const { generators, rounds, energy } = useData();
+  const { generators, rounds, energy, users } = useData();
   const { project, instructor } = location.state;
 
   // console.log(project, instructor)
@@ -25,6 +25,7 @@ function ProjectR() {
         generators={generators} 
         rounds={rounds}
         energy={energy}
+        users={users}
       />
     </div>
   );

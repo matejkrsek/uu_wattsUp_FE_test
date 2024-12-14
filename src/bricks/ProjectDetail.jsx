@@ -27,13 +27,18 @@ ChartJS.register(
   Legend
 );
 
+<<<<<<< HEAD
 const ProjectDetail = ({ project, generators, rounds, energy }) => {
+=======
+const ProjectDetail = ({ project, instructor, generators, rounds, energy, users }) => {
+>>>>>>> ac6437dca39c7962df4e1143ae1578000e5e68d8
   const navigate = useNavigate();
   const { projectId } = useParams();
   const [isModalShown, setIsModalShown] = useState(false);
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
   const [isUpdatedToastShown, setIsUpdatedToastShown] = useState(false);
   const [currentProject, setCurrentProject] = useState(project);
+  const createdBy = users.find((user) => user.id === currentProject.createdBy);
 
   const { users } = useData();
 
@@ -81,24 +86,39 @@ const ProjectDetail = ({ project, generators, rounds, energy }) => {
 
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <div
         style={{
           display: "flex",
-          gap: "10px",
           justifyContent: "space-between",
+          alignItems: "center",
+          fontSize: "0.85rem",
+          marginBottom: "10px",
         }}
       >
-        <div></div>
-        <div>
-          <h1>{currentProject.name}</h1>
-          <h4>{currentProject.date}</h4>
+        <p>Organization: {currentProject.organization}</p>
+        <p>Created by: {createdBy ? createdBy.name : "Unknown"}</p>
+        <p>Creation date: {currentProject.creationDate}</p>
+      </div>
+  
+      <div 
+        style={{
+          display: "flex", 
+          justifyContent: "space-between", 
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <h1 style={{ margin: 0 }}>{currentProject.name}</h1>
+          <h4 style={{ margin: 0 }}>{currentProject.date}</h4>
         </div>
-        <div
-          style={{
-            height: "35px",
-            display: "flex",
-            marginLeft: "50px",
+  
+        <div 
+          style={{ 
+            display: "flex", 
             gap: "5px",
+            height: "35px",
           }}
         >
           <Button
@@ -124,12 +144,13 @@ const ProjectDetail = ({ project, generators, rounds, energy }) => {
           </Button>
         </div>
       </div>
+    </div>
       <br />
 
       <div style={{ textAlign: "left" }}>
         <p>
-          <b>Organization: </b>
-          {currentProject.organization}
+          <b>Description: </b>
+          {currentProject.description}
         </p>
         <p>
           <b>Instructor: </b>
@@ -143,7 +164,10 @@ const ProjectDetail = ({ project, generators, rounds, energy }) => {
           <b>Generators: </b>
           {filteredGenerators.map((generator) => generator.name).join(", ")}
         </p>
-
+        <p>
+          <b>Round duration: </b>
+          {currentProject.roundDuration}
+        </p>
         <h5>Rounds:</h5>
         <br />
         {filteredRounds.length > 0 ? (
@@ -158,7 +182,7 @@ const ProjectDetail = ({ project, generators, rounds, energy }) => {
                 }
                 style={{ cursor: "pointer" }}
               >
-                Round {index + 1}
+                <strong> Round {index + 1} </strong>
               </p>
               {/* Stĺpcový graf pre každé kolo */}
               <div style={{ height: "400px" }}>
