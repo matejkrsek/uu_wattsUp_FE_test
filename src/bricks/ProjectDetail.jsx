@@ -27,20 +27,16 @@ ChartJS.register(
   Legend
 );
 
-<<<<<<< HEAD
 const ProjectDetail = ({ project, generators, rounds, energy }) => {
-=======
-const ProjectDetail = ({ project, instructor, generators, rounds, energy, users }) => {
->>>>>>> ac6437dca39c7962df4e1143ae1578000e5e68d8
   const navigate = useNavigate();
   const { projectId } = useParams();
   const [isModalShown, setIsModalShown] = useState(false);
   const [isDeleteModalShown, setIsDeleteModalShown] = useState(false);
   const [isUpdatedToastShown, setIsUpdatedToastShown] = useState(false);
   const [currentProject, setCurrentProject] = useState(project);
-  const createdBy = users.find((user) => user.id === currentProject.createdBy);
 
   const { users } = useData();
+  const createdBy = users.find((user) => user.id === currentProject.createdBy);
 
   const handleProjectUpdate = (updatedProject) => {
     setCurrentProject(updatedProject);
@@ -86,65 +82,65 @@ const ProjectDetail = ({ project, instructor, generators, rounds, energy, users 
 
   return (
     <div style={{ maxWidth: "500px", margin: "0 auto", padding: "20px" }}>
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          fontSize: "0.85rem",
-          marginBottom: "10px",
-        }}
-      >
-        <p>Organization: {currentProject.organization}</p>
-        <p>Created by: {createdBy ? createdBy.name : "Unknown"}</p>
-        <p>Creation date: {currentProject.creationDate}</p>
-      </div>
-  
-      <div 
-        style={{
-          display: "flex", 
-          justifyContent: "space-between", 
-          alignItems: "center",
-          marginBottom: "20px",
-        }}
-      >
-        <div style={{ flex: 1 }}>
-          <h1 style={{ margin: 0 }}>{currentProject.name}</h1>
-          <h4 style={{ margin: 0 }}>{currentProject.date}</h4>
-        </div>
-  
-        <div 
-          style={{ 
-            display: "flex", 
-            gap: "5px",
-            height: "35px",
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            fontSize: "0.85rem",
+            marginBottom: "10px",
           }}
         >
-          <Button
-            variant="outline-info"
-            size="sm"
-            onClick={() => setIsModalShown(true)}
+          <p>Organization: {currentProject.organization}</p>
+          <p>Created by: {createdBy ? createdBy.name : "Unknown"}</p>
+          <p>Creation date: {currentProject.creationDate}</p>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <div style={{ flex: 1 }}>
+            <h1 style={{ margin: 0 }}>{currentProject.name}</h1>
+            <h4 style={{ margin: 0 }}>{currentProject.date}</h4>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "5px",
+              height: "35px",
+            }}
           >
-            <Icon path={mdiPencil} size={1} />
-          </Button>
-          <Button
-            size="sm"
-            variant="outline-danger"
-            onClick={() => setIsDeleteModalShown(true)}
-          >
-            <Icon path={mdiDelete} size={1} />
-          </Button>
-          <Button
-            size="sm"
-            variant="outline-secondary"
-            onClick={() => navigate("/overview")}
-          >
-            <Icon path={mdiKeyboardBackspace} size={1} />
-          </Button>
+            <Button
+              variant="outline-info"
+              size="sm"
+              onClick={() => setIsModalShown(true)}
+            >
+              <Icon path={mdiPencil} size={1} />
+            </Button>
+            <Button
+              size="sm"
+              variant="outline-danger"
+              onClick={() => setIsDeleteModalShown(true)}
+            >
+              <Icon path={mdiDelete} size={1} />
+            </Button>
+            <Button
+              size="sm"
+              variant="outline-secondary"
+              onClick={() => navigate("/overview")}
+            >
+              <Icon path={mdiKeyboardBackspace} size={1} />
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
       <br />
 
       <div style={{ textAlign: "left" }}>
